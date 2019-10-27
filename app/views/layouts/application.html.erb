@@ -10,6 +10,13 @@
   </head>
 
   <body>
+      <%= render 'common/nav' %>
+      <%= render 'common/search'%>
+
+      <!-- devise error messages-->
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      
     <%= yield %>
   </body>
 </html>

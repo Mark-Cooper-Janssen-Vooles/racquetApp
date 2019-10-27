@@ -1,0 +1,19 @@
+nav {
+  height: 31px;
+  background: rgb(30, 46, 227);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .left {
+    background: white;
+    margin-left: 40px;
+  }
+  .right {
+    margin-right: 15px;
+    background: white;
+    span {
+      padding-right: 4px;
+    }
+  }
+}
+

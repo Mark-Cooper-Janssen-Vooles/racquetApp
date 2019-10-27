@@ -1,0 +1,29 @@
+.search-bar {
+  height: 75px;
+  background: rgba(33, 33, 244, 0.351);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    margin-left: 40px;
+    margin-right: 15px;
+  }
+  
+  .search-area {
+    width: 65%;
+    height: 45px;
+    background: white;
+  }
+  .button {
+    margin-left: 15px;
+    width: 200px;
+    height: 45px;
+    background: white;
+    margin-right: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
