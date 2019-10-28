@@ -18,16 +18,17 @@
 <% if @user_detail.location %>
   <p>
     <strong>Location:</strong>
-    <%= @user_detail.location.address_line @user_detail.location.postcode @user_detail.location.state %>
-  </p>
+    <%= @user_detail.location.address_line %> |
+    <%= @user_detail.location.address_line %> |
+    <%= @user_detail.location.postcode %> |
+    <%= @user_detail.location.state %>
+    <%= link_to("Edit", edit_location_path) %>
 <% else %>
   <%= link_to("Add your location", new_location_path) %>
 <% end %>
 
-<p>
-  <strong>Type:</strong>
-  <%= @user_detail.user_type %>
-</p>
+<%#= @user_detail.user_type %>
 
-<%= link_to 'Edit', edit_user_detail_path(@user_detail) %> |
-<%= link_to 'Back', user_details_path %>
+<br><br>
+<%= link_to 'Edit Profile', edit_user_detail_path(@user_detail) %> 
+

@@ -9,7 +9,7 @@
 
   <div class="right">
     <% if user_signed_in? && current_user.user_detail != nil %>
-      <span>Sell</span>
+      <%= link_to("Sell", new_racquet_path)%>
       <span>Favourites</span>
       <%= link_to("My Account", user_detail_path(current_user.user_detail.id)) %>
     <% else %>

@@ -26,6 +26,22 @@
     <%= form.hidden_field(:user_id, :value => current_user.id) %>
   </div>
 
+  <%= form.fields_for :location do |loc_form|%>
+  
+    <%= loc_form.label :postcode %>
+    <%= loc_form.text_field :postcode %>
+
+    <%= loc_form.label :suburb %>
+    <%= loc_form.text_field :suburb %>
+
+    <%= loc_form.label :address_line %>
+    <%= loc_form.text_field :address_line %>
+
+    <%= loc_form.label :state %>
+    <%= loc_form.text_field :state %>
+
+  <% end %>
+
     <%#= form.label :location_id %>
     <%#= form.text_field :location_id %>
     <%# need access to location table here! do in controller. %>

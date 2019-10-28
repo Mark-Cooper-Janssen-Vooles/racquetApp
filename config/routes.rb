@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   resources :racquets
   resources :statuses
   devise_for :users, controllers: { registrations: "registrations" }
-  root to: "pages#index"
+
+  root to: "racquets#index"
 
   # devise_for :users, controllers: {
   #   sessions: 'users/sessions'

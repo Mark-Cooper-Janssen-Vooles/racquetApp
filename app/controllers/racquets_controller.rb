@@ -4,7 +4,7 @@ class RacquetsController < ApplicationController
   # GET /racquets
   # GET /racquets.json
   def index
-    @racquets = Racquet.all
+    @racquets = Racquet.all.sort
   end
 
   # GET /racquets/1
@@ -69,6 +69,6 @@ class RacquetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def racquet_params
-      params.require(:racquet).permit(:user_id, :status_id, :description, :head_size, :length, :strung_weight, :balance, :stiffness, :string_pattern, :brand, :type)
+      params.require(:racquet).permit(:seller_user_id, :description, :head_size, :length, :strung_weight, :balance, :stiffness, :string_pattern, :brand, :racquet_type)
     end
 end

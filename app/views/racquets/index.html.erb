@@ -23,7 +23,7 @@
   <tbody>
     <% @racquets.each do |racquet| %>
       <tr>
-        <td><%= racquet.user %></td>
+        <td><%= racquet.seller_user_id %></td>
         <td><%= racquet.status %></td>
         <td><%= racquet.description %></td>
         <td><%= racquet.head_size %></td>
@@ -33,7 +33,7 @@
         <td><%= racquet.stiffness %></td>
         <td><%= racquet.string_pattern %></td>
         <td><%= racquet.brand %></td>
-        <td><%= racquet.type %></td>
+        <td><%= racquet.racquet_type %></td>
         <td><%= link_to 'Show', racquet %></td>
         <td><%= link_to 'Edit', edit_racquet_path(racquet) %></td>
         <td><%= link_to 'Destroy', racquet, method: :delete, data: { confirm: 'Are you sure?' } %></td>

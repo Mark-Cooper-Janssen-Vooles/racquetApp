@@ -12,19 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :seller_user_id %>
-    <%= form.text_field :seller_user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :status_id %>
-    <%= form.text_field :status_id %>
+    <%= form.hidden_field(:seller_user_id, :value => current_user.id) %>
   </div>
 
   <div class="field">
     <%= form.label :description %>
     <%= form.text_area :description %>
   </div>
+
+  <%# add photos %>
 
   <div class="field">
     <%= form.label :head_size %>
@@ -57,13 +53,36 @@
   </div>
 
   <div class="field">
-    <%= form.label :brand %>
-    <%= form.number_field :brand %>
+    <%#= form.label :brand %>
+    <%#= form.number_field :brand %>
+
+      <%= form.label :brand %>
+      <%= form.select :brand, options_for_select(Racquet.brands.keys.collect { |u| [u] }) %>
+
+     <%#= form.label :brand %>
+        <%# Racquet.brands.keys.each do |brand| %> 
+          <%#= form.label brand %>
+          <%#= form.radio_button :brand, brand %>
+
+          <%# if brand == racquet.brand %>
+              <%# form.radio_button :brand, :checked => true %>
+          <%# end %>
+      <%# end %>
   </div>
 
   <div class="field">
-    <%= form.label :type %>
-    <%= form.number_field :type %>
+    <%#= form.label :type %>
+    <%#= form.number_field :type %>
+
+        <%= form.label :racquet_type %>
+        <% Racquet.racquet_types.keys.each do |type| %> 
+          <%= form.label type %>
+          <%= form.radio_button :racquet_type, type %>
+
+          <% if type == racquet.racquet_type %>
+              <% form.radio_button :racquet_type, :checked => true %>
+          <% end %>
+      <% end %>
   </div>
 
   <div class="actions">

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_28_012529) do
+ActiveRecord::Schema.define(version: 2019_10_28_040353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,8 +27,6 @@ ActiveRecord::Schema.define(version: 2019_10_28_012529) do
   end
 
   create_table "racquets", force: :cascade do |t|
-    t.bigint "seller_user_id_id"
-    t.bigint "status_id"
     t.text "description"
     t.string "head_size"
     t.string "length"
@@ -37,11 +35,11 @@ ActiveRecord::Schema.define(version: 2019_10_28_012529) do
     t.string "stiffness"
     t.string "string_pattern"
     t.integer "brand"
-    t.integer "type"
+    t.integer "racquet_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["seller_user_id_id"], name: "index_racquets_on_seller_user_id_id"
-    t.index ["status_id"], name: "index_racquets_on_status_id"
+    t.bigint "seller_user_id"
+    t.index ["seller_user_id"], name: "index_racquets_on_seller_user_id"
   end
 
   create_table "shopping_carts", force: :cascade do |t|
@@ -60,7 +58,9 @@ ActiveRecord::Schema.define(version: 2019_10_28_012529) do
     t.bigint "buyer_user_id_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "racquet_id"
     t.index ["buyer_user_id_id"], name: "index_statuses_on_buyer_user_id_id"
+    t.index ["racquet_id"], name: "index_statuses_on_racquet_id"
   end
 
   create_table "user_details", force: :cascade do |t|
@@ -86,10 +86,10 @@ ActiveRecord::Schema.define(version: 2019_10_28_012529) do
   end
 
   add_foreign_key "locations", "user_details"
-  add_foreign_key "racquets", "statuses"
-  add_foreign_key "racquets", "users", column: "seller_user_id_id"
+  add_foreign_key "racquets", "users", column: "seller_user_id"
   add_foreign_key "shopping_carts", "racquets"
   add_foreign_key "shopping_carts", "users"
+  add_foreign_key "statuses", "racquets"
   add_foreign_key "statuses", "users", column: "buyer_user_id_id"
   add_foreign_key "user_details", "users"
 end

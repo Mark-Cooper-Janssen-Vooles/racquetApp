@@ -15,6 +15,7 @@ class UserDetailsController < ApplicationController
   # GET /user_details/new
   def new
     @user_detail = UserDetail.new
+    @user_detail.location = Location.new
   end
 
   # GET /user_details/1/edit
@@ -28,7 +29,7 @@ class UserDetailsController < ApplicationController
 
     respond_to do |format|
       if @user_detail.save
-        format.html { redirect_to new_location_path, notice: 'User detail was successfully created.' }
+        format.html { redirect_to user_detail_path, notice: 'User detail was successfully created.' }
         format.json { render :show, status: :created, location: @user_detail }
       else
         format.html { render :new }
@@ -69,6 +70,6 @@ class UserDetailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_detail_params
-      params.require(:user_detail).permit(:name, :description, :user_id, :location_id, :user_type)
+      params.require(:user_detail).permit(:name, :description, :user_id, :user_type, location_attributes: [ :state, :suburb, :address_line, :postcode])
     end
 end
