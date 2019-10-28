@@ -13,10 +13,13 @@
       <%= render 'common/nav' %>
       <%= render 'common/search'%>
 
+      <div class="main-body">
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+          <%= yield %>
+      </div>
+
       <!-- devise error messages-->
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      
-    <%= yield %>
+
   </body>
 </html>

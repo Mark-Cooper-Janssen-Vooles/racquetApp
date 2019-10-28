@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user_detail.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @user_detail.description %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= current_user.email %>
+</p>
+
+<% if @user_detail.location %>
+  <p>
+    <strong>Location:</strong>
+    <%= @user_detail.location.address_line @user_detail.location.postcode @user_detail.location.state %>
+  </p>
+<% else %>
+  <%= link_to("Add your location", new_location_path) %>
+<% end %>
+
+<p>
+  <strong>Type:</strong>
+  <%= @user_detail.user_type %>
+</p>
+
+<%= link_to 'Edit', edit_user_detail_path(@user_detail) %> |
+<%= link_to 'Back', user_details_path %>

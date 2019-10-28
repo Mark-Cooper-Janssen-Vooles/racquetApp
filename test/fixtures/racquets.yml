@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  status: one
+  description: MyText
+  head_size: MyString
+  length: MyString
+  strung_weight: MyString
+  balance: MyString
+  stiffness: MyString
+  string_pattern: MyString
+  brand: 1
+  type: 1
+
+two:
+  user: two
+  status: two
+  description: MyText
+  head_size: MyString
+  length: MyString
+  strung_weight: MyString
+  balance: MyString
+  stiffness: MyString
+  string_pattern: MyString
+  brand: 1
+  type: 1

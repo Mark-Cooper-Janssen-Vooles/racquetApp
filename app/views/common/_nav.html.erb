@@ -1,11 +1,21 @@
 <nav>
   <div class="left">
+  <% if user_signed_in? %>
+    <%= link_to("Logout", destroy_user_session_path, method: :delete)%>
+  <% else %>
     <%= link_to("Login", new_user_session_path)%>
+  <% end %>
   </div>
 
   <div class="right">
-    <span>Sell</span>
-    <span>Favourites</span>
-    <span>My Account</span>
+    <% if user_signed_in? && current_user.user_detail != nil %>
+      <span>Sell</span>
+      <span>Favourites</span>
+      <%= link_to("My Account", user_detail_path(current_user.user_detail.id)) %>
+    <% else %>
+      <%= link_to("Sell", new_user_session_path) %>
+      <%= link_to("Favourites", new_user_session_path) %>
+      <%= link_to("My Account", new_user_session_path) %>
+    <% end %>
   </div>
 </nav>

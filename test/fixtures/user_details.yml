@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  user: one
+  location: one
+  shopping_cart: one
+  type: 1
+
+two:
+  name: MyString
+  description: MyText
+  user: two
+  location: two
+  shopping_cart: two
+  type: 1

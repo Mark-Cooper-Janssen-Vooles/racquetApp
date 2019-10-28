@@ -1,0 +1,41 @@
+<%= form_with(model: user_detail, local: true) do |form| %>
+  <% if user_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_detail.errors.count, "error") %> prohibited this user_detail from being saved:</h2>
+
+      <ul>
+      <% user_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%# this needs to default to the logged in users id! %>
+    <%= form.hidden_field(:user_id, :value => current_user.id) %>
+  </div>
+
+    <%#= form.label :location_id %>
+    <%#= form.text_field :location_id %>
+    <%# need access to location table here! do in controller. %>
+
+  <div class="field">
+    <%# enum needs to default to 0 for non-admin, invisible field %>
+    <%= form.hidden_field(:user_type, :value => "normal") %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

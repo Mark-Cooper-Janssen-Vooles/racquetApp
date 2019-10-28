@@ -1,0 +1,72 @@
+<%= form_with(model: racquet, local: true) do |form| %>
+  <% if racquet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(racquet.errors.count, "error") %> prohibited this racquet from being saved:</h2>
+
+      <ul>
+      <% racquet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :seller_user_id %>
+    <%= form.text_field :seller_user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status_id %>
+    <%= form.text_field :status_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :head_size %>
+    <%= form.text_field :head_size %>
+  </div>
+
+  <div class="field">
+    <%= form.label :length %>
+    <%= form.text_field :length %>
+  </div>
+
+  <div class="field">
+    <%= form.label :strung_weight %>
+    <%= form.text_field :strung_weight %>
+  </div>
+
+  <div class="field">
+    <%= form.label :balance %>
+    <%= form.text_field :balance %>
+  </div>
+
+  <div class="field">
+    <%= form.label :stiffness %>
+    <%= form.text_field :stiffness %>
+  </div>
+
+  <div class="field">
+    <%= form.label :string_pattern %>
+    <%= form.text_field :string_pattern %>
+  </div>
+
+  <div class="field">
+    <%= form.label :brand %>
+    <%= form.number_field :brand %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.number_field :type %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>User Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>User</th>
+      <th>Location</th>
+      <th>Shopping cart</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_details.each do |user_detail| %>
+      <tr>
+        <td><%= user_detail.name %></td>
+        <td><%= user_detail.description %></td>
+        <td><%= user_detail.user %></td>
+        <td><%= user_detail.location %></td>
+        <td><%= user_detail.user_type %></td>
+        <td><%= link_to 'Show', user_detail %></td>
+        <td><%= link_to 'Edit', edit_user_detail_path(user_detail) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%#don't need this link!%>
+<%#= link_to 'New User Detail', new_user_detail_path %>

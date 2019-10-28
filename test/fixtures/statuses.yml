@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sold: false
+  date_sold: 2019-10-28
+  date_listed: 2019-10-28
+  view_count: 1
+  user: one
+
+two:
+  sold: false
+  date_sold: 2019-10-28
+  date_listed: 2019-10-28
+  view_count: 1
+  user: two

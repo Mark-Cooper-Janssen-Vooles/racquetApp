@@ -1,0 +1,2 @@
+module RacquetsHelper
+end
