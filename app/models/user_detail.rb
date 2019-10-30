@@ -1,6 +1,6 @@
 class UserDetail < ApplicationRecord
   belongs_to :user
-  has_one :location
+  has_one :location, :dependent => :destroy
   accepts_nested_attributes_for :location
 
   validates :name, :description, :user_type, presence: true

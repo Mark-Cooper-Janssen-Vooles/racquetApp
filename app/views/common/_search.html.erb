@@ -4,12 +4,19 @@
     <span><%= link_to("RacquetApp", root_path) %></span>
   </div>
 
-    <div class="search-area">
-    </div>
+  <div class="search-stuff">
+      <% @q = Racquet.ransack(params[:q]) %>
+      <%= search_form_for @q, url: search_racquets_path, html: { method: :post } do |f| %>
 
-    <div class="button">
-    Search
-    </div>
+        <%= f.search_field :description_or_length_or_balance_or_stiffness_or_string_pattern_or_head_size_or_brand_cont, class: "search-input"%>
 
+        <%#= f.search_field :brand_cont, class: "search-input"%>
+
+        <div class="button">
+          <%= f.submit %>
+        </div>
+
+      <% end %>
+  </div>
 
 </div>

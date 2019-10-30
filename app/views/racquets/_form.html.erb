@@ -21,6 +21,11 @@
   </div>
 
   <%# add photos %>
+  <div class="field">
+  <%= form.label :picture %> <%= form.file_field :picture, accept:
+  'image/png,image/gif,image/jpeg,image/jpg' %>
+  </div>
+
 
   <div class="field">
     <%= form.label :head_size %>
@@ -57,7 +62,9 @@
     <%#= form.number_field :brand %>
 
       <%= form.label :brand %>
-      <%= form.select :brand, options_for_select(Racquet.brands.keys.collect { |u| [u] }) %>
+      <%#= form.select :brand, options_for_select(Racquet.brands.keys.collect { |u| [u] }) %>
+      <%= form.select :brand, [' ', 'wilson','head','yonex','babolat', 'dunlop', 'gamma', 'prince', 'prokennex', 'technifibre', 'volkl'], :selected => racquet.brand %>
+
 
      <%#= form.label :brand %>
         <%# Racquet.brands.keys.each do |brand| %> 

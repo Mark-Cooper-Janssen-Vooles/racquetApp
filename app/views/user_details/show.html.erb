@@ -1,5 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+<% if @user_detail.user_type == "admin" %>
+  <h1>Admin Dashboard:</h1>
+  <%= link_to("See users index", user_details_path)%> | <%= link_to("See racquets index", racquets_path)%>
+  <br>
+<% end %>
+
 <p>
   <strong>Name:</strong>
   <%= @user_detail.name %>
@@ -22,13 +28,27 @@
     <%= @user_detail.location.address_line %> |
     <%= @user_detail.location.postcode %> |
     <%= @user_detail.location.state %>
-    <%= link_to("Edit", edit_location_path) %>
 <% else %>
   <%= link_to("Add your location", new_location_path) %>
 <% end %>
 
-<%#= @user_detail.user_type %>
+<br>
+
+<p><strong>Your racquet listings: </strong></p>
+<% if @user_detail.user.racquets.count == 0 %>
+  You haven't listed any racquets yet - 
+  <%= link_to("List a racquet for sale", new_racquet_path)%>
+<% else %>
+  <% @user_detail.user.racquets.each do |racquet| %>
+    <div>
+      <%= racquet.description %>
+      <%= image_tag(racquet.picture, class: "index-image") if racquet.picture.attached? %>
+    </div>
+  <% end %>
+<% end %>
 
 <br><br>
-<%= link_to 'Edit Profile', edit_user_detail_path(@user_detail) %> 
-
+<% if user_signed_in? && current_user.user_detail.id == @user_detail.id %>
+  <%= link_to 'Edit Profile', edit_user_detail_path(@user_detail) %> | 
+  <%= link_to 'Delete Profile', @user_detail, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>

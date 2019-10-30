@@ -16,6 +16,7 @@
       <th>String pattern</th>
       <th>Brand</th>
       <th>Type</th>
+      <th>Picture</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -34,14 +35,19 @@
         <td><%= racquet.string_pattern %></td>
         <td><%= racquet.brand %></td>
         <td><%= racquet.racquet_type %></td>
+        <td>
+        <%= image_tag(racquet.picture, class: "index-image") if racquet.picture.attached? %>
+        </td>
         <td><%= link_to 'Show', racquet %></td>
-        <td><%= link_to 'Edit', edit_racquet_path(racquet) %></td>
-        <td><%= link_to 'Destroy', racquet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+
+        <% if user_signed_in? && (racquet.seller_user_id == current_user.id || current_user.user_detail.user_type == "admin") %>
+          <td><%= link_to 'Edit', edit_racquet_path(racquet) %></td>
+          <td><%= link_to 'Destroy', racquet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+
+
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Racquet', new_racquet_path %>

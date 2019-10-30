@@ -3,4 +3,4 @@
 <%= render 'form', user_detail: @user_detail %>
 
 <%= link_to 'Show', @user_detail %> |
-<%= link_to 'Back', user_details_path %>
+<%= link_to 'Back', user_detail_path(@user_detail.id) %>

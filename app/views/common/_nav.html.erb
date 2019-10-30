@@ -12,6 +12,12 @@
       <%= link_to("Sell", new_racquet_path)%>
       <span>Favourites</span>
       <%= link_to("My Account", user_detail_path(current_user.user_detail.id)) %>
+
+    <% elsif user_signed_in? %>
+      <%= link_to("Sell", new_user_detail_path)%>
+      <span>Favourites</span>
+      <%= link_to("My Account", new_user_detail_path) %>
+
     <% else %>
       <%= link_to("Sell", new_user_session_path) %>
       <%= link_to("Favourites", new_user_session_path) %>

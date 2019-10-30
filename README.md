@@ -206,3 +206,8 @@ Describe the way tasks are allocated and tracked in your project
 (describe here)
 
 ---
+
+### Trello boards
+
+![Trello](/docs/trello1.png "Trello")
+![Trello](/docs/trello2.png "Trello")

@@ -55,5 +55,9 @@
   <%= @racquet.racquet_type %>
 </p>
 
+<div class="show-image-card">
+  <%= image_tag(@racquet.picture, class: "show-image") if @racquet.picture.attached? %>
+</div>
+
 <%= link_to 'Edit', edit_racquet_path(@racquet) %> |
 <%= link_to 'Back', racquets_path %>
