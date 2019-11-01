@@ -5,9 +5,49 @@
 .show-image {
   border: 1px solid black;
   width: 200px;
+  height: 200px;
 }
 
 .index-image {
   border: 1px solid black;
   width: 100px;
+}
+
+.pagination {
+  ul {
+    display: flex;
+    list-style-type: none;
+    li {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+  }
+}
+
+.brand-selection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 20px;
+  margin-bottom: 10px;
+
+  .brand {
+    height: 70px;
+    width: 70px;
+    background: rgb(175, 175, 222);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    span {
+
+    }
+    .image {
+      height: 50px;
+      width: 50px;
+      background: white;
+      border-radius: 25px;
+    }
+  }
 }

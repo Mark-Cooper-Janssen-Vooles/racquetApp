@@ -9,4 +9,5 @@ class User < ApplicationRecord
   has_many :shopping_carts
 
   has_one :user_detail
+  has_one :favourite
 end

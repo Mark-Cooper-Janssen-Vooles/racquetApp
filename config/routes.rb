@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     collection do
       match 'search' => 'racquets#search', via: [:get, :post], as: :search
     end
+      post :increment_page_views
   end
 
   resources :statuses
@@ -16,12 +17,18 @@ Rails.application.routes.draw do
 
   root to: "racquets#index"
 
-  # post "/racquets/runracquets/:q", to: "racquets#runracquets", as: "run-racquets"
+  get 'wilson', to: 'racquets#wilson'
+  get 'head', to: 'racquets#head'
+  get 'yonex', to: 'racquets#yonex'
+  get 'babolat', to: 'racquets#babolat'
+  get 'dunlop', to: 'racquets#dunlop'
+  get 'gamma', to: 'racquets#gamma'
+  get 'prince', to: 'racquets#prince'
+  get 'prokennex', to: 'racquets#prokennex'
+  get 'technifibre', to: 'racquets#technifibre'
+  get 'volkl', to: 'racquets#volkl'
 
-  # devise_for :users, controllers: {
-  #   sessions: 'users/sessions'
-  # }
-
+  get "/payments/success", to: "payments#success"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

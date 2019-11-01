@@ -211,3 +211,12 @@ Describe the way tasks are allocated and tracked in your project
 
 ![Trello](/docs/trello1.png "Trello")
 ![Trello](/docs/trello2.png "Trello")
+![Trello](/docs/trello3.png "Trello")
+
+
+### Things to talk about in presentation
+- delete_duplicates in favourites controller
+- search partial which displays in all pages, getting @q to work
+- pagination gem
+- incrementing page views
+- seed file

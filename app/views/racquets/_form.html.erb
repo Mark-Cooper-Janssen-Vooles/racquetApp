@@ -16,6 +16,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
     <%= form.label :description %>
     <%= form.text_area :description %>
   </div>
@@ -78,9 +83,6 @@
   </div>
 
   <div class="field">
-    <%#= form.label :type %>
-    <%#= form.number_field :type %>
-
         <%= form.label :racquet_type %>
         <% Racquet.racquet_types.keys.each do |type| %> 
           <%= form.label type %>
@@ -90,6 +92,11 @@
               <% form.radio_button :racquet_type, :checked => true %>
           <% end %>
       <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_area :price %>
   </div>
 
   <div class="actions">

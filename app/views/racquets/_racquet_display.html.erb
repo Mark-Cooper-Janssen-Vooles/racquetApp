@@ -1,0 +1,72 @@
+<% if @racquets.count == 0 %>
+  There are no racquets of this brand for sale to display yet!
+<% else %>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Head size</th>
+        <th>Length</th>
+        <th>Strung weight</th>
+        <th>Balance</th>
+        <th>Stiffness</th>
+        <th>String pattern</th>
+        <th>Brand</th>
+        <th>Type</th>
+        <th>Picture</th>
+        <th colspan="4"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @racquets.each do |racquet| %>
+        <tr>
+          <td><%= racquet.title %></td>
+          <td><%= racquet.price %></td>
+          <td><%= racquet.description %></td>
+          <td><%= racquet.head_size %></td>
+          <td><%= racquet.length %></td>
+          <td><%= racquet.strung_weight %></td>
+          <td><%= racquet.balance %></td>
+          <td><%= racquet.stiffness %></td>
+          <td><%= racquet.string_pattern %></td>
+          <td><%= racquet.brand %></td>
+          <td><%= racquet.racquet_type %></td>
+          <td>
+          <%= image_tag(racquet.picture, class: "index-image") if racquet.picture.attached? %>
+          </td>
+          <td><%= link_to 'Show', racquet %></td>
+
+
+          <% if user_signed_in? && (racquet.seller_user_id == current_user.id || current_user.user_detail.user_type == "admin") %>
+            <td><%= link_to 'Edit', edit_racquet_path(racquet) %></td>
+            <td><%= link_to 'Destroy', racquet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+
+          <%# make this a form that creates a new favourite %>
+          <% if user_signed_in? %>
+
+            <%= form_with(model: favourite, local: true, url: favourites_path) do |form| %>
+              <div class="field">
+                <%# this needs to default to the logged in users id! %>
+                <%= form.hidden_field(:user_id, :value => current_user.id) %>
+              </div>
+
+              <div class="field">
+                <%# this needs to default to the logged in users id! %>
+                <%= form.hidden_field(:racquet_id, :value => racquet.id) %>
+              </div>
+
+              <div class="actions">
+                <%= form.submit "Favourite" %>
+              </div>
+            <% end %>
+
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

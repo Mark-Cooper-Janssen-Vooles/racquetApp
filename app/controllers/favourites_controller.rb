@@ -4,7 +4,8 @@ class FavouritesController < ApplicationController
   # GET /favourites
   # GET /favourites.json
   def index
-    @favourites = Favourite.all
+    @favourites = Favourite.where("user_id = '#{current_user.id}'").order(created_at: :desc)
+
   end
 
   # GET /favourites/1
@@ -28,7 +29,8 @@ class FavouritesController < ApplicationController
 
     respond_to do |format|
       if @favourite.save
-        format.html { redirect_to @favourite, notice: 'Favourite was successfully created.' }
+        delete_duplicates
+        format.html { redirect_to favourites_path, notice: 'Favourite was successfully created.' }
         format.json { render :show, status: :created, location: @favourite }
       else
         format.html { render :new }
@@ -71,4 +73,16 @@ class FavouritesController < ApplicationController
     def favourite_params
       params.require(:favourite).permit(:user_id, :racquet_id)
     end
+
+    def delete_duplicates
+      Racquet.all.each do |racquet|
+
+        possible_duplicate = Favourite.where("user_id = '#{current_user.id}' and racquet_id = '#{racquet.id}'")
+
+        if possible_duplicate.count > 1
+          possible_duplicate.last.destroy
+        end
+      end
+    end
+
 end

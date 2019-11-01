@@ -1,6 +1,21 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Views:</strong>
+  <%= @racquet.status.view_count %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @racquet.title %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @racquet.price %>
+</p>
+
+<p>
   <strong>User:</strong>
   <%= @racquet.seller_user_id %>
 </p>
@@ -59,5 +74,26 @@
   <%= image_tag(@racquet.picture, class: "show-image") if @racquet.picture.attached? %>
 </div>
 
-<%= link_to 'Edit', edit_racquet_path(@racquet) %> |
+<% if user_signed_in? && @racquet.seller_user_id == current_user.id %>
+  <%= link_to 'Edit', edit_racquet_path(@racquet) %>
+<% elsif user_signed_in? %>
+  <button data-stripe="payment">Buy this racquet <%= number_to_currency(@racquet.price) %></button>
+<% end %>
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+  document
+    .querySelector("[data-stripe='payment']")
+    .addEventListener("click", () => {
+      const stripe = Stripe(
+        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+      );
+
+      stripe.redirectToCheckout({
+        sessionId: "<%= @session_id %>"
+      });
+    });
+</script>
+
 <%= link_to 'Back', racquets_path %>

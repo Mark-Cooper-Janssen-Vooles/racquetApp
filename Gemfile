@@ -70,3 +70,11 @@ gem "ransack", "~> 2.3"
 gem "faker", "~> 2.6"
 
 gem "aws-sdk", "~> 3.0"
+
+gem "kaminari", "~> 1.1"
+
+gem "bootstrap", "~> 4.3"
+
+gem "jquery-rails", "~> 4.3"
+
+gem "stripe", "~> 5.7"
