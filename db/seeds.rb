@@ -11,13 +11,16 @@ require 'aws-sdk'
 one_to_ten = (1..10).to_a
 price = (50..320).to_a
 state_rand = ["VIC", "NSW", "WA", "TAS", "NT", "ACT", "QLD", "SA"]
-suburb = ["Melbourne", "Perth", "Sydney", "Hobart"]
+suburb = ["Melbourne", "Perth", "Hobart"]
 
 one_to_ten.each do |user|
   User.create(email: Faker::Internet.email, password: "password")
   UserDetail.create(name: Faker::Name.name, description: Faker::Lorem.sentence(word_count: 15),  user_id: user, user_type: 0)
 
-  Location.create(state: state_rand.sample, suburb: suburb.sample, address_line: "123 fake street", postcode: "3000", user_detail_id: user)
+  1.times do |thing|
+    suburb1 = suburb.sample
+    Location.create(state: state_rand.sample, suburb: suburb1, address_line: "123 fake street", postcode: "3000", user_detail_id: user, latitude: Geocoder.search(suburb1).first.coordinates[0].to_d, longitude: Geocoder.search(suburb1).first.coordinates[1].to_d)
+  end
 
   #in sq inch
   head_size_rand = (85..135).to_a

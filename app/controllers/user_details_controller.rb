@@ -3,7 +3,7 @@ class UserDetailsController < ApplicationController
 
   before_action :set_user_detail, only: [:show]
 
-  before_action :set_user_detail_specific, only: [:edit, :update, :destroy]
+  before_action :set_user_detail_specific, only: [:index, :edit, :update, :destroy]
 
   # before_action :set_user_detail_specific, only: [:edit, :update, :destroy]
 
@@ -40,6 +40,14 @@ class UserDetailsController < ApplicationController
   # POST /user_details.json
   def create
     @user_detail = UserDetail.new(user_detail_params)
+
+    #create coords based on suburb
+    suburb = @user_detail.location.suburb
+    coords = Geocoder.search(suburb).first.coordinates
+    @user_detail.location.latitude = coords[0].to_d
+    @user_detail.location.longitude = coords[1].to_d
+
+    @user_detail.save
 
     respond_to do |format|
       if @user_detail.save

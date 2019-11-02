@@ -1,3 +1,11 @@
+<% provide :head_tags do %>
+    <script>
+    document.addEventListener("DOMContentLoaded", function(){
+        initMap(<%=@seller_user.user_detail.location.latitude%>, <%=@seller_user.user_detail.location.longitude%>)
+    });
+    </script>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 <div class="racquet-show-content">
@@ -71,13 +79,16 @@
     <div class="seller-title">
       <span>Posted by <%= @seller_user.user_detail.name %></span>
       <span>Joined: <%= @seller_user.user_detail.created_at.strftime("%Y-%m-%d")%></span>
+      <span><%= link_to("View Users Profile", user_detail_path(@seller_user.id))%></span>
     </div>
     <div class="seller-body">
       <span><%= @seller_user.user_detail.description %></span>
       <span>
     </div>
     <div class="seller-location">
-      <div class="googlemaps-api">GOOGLE MAPS API GOES HERE, use location data</div>
+      <div class="googlemaps-api">
+            <div id="map"></div>
+      </div>
     </div>
   </div>
 

@@ -78,3 +78,5 @@ gem "bootstrap", "~> 4.3"
 gem "jquery-rails", "~> 4.3"
 
 gem "stripe", "~> 5.7"
+
+gem "geocoder", "~> 1.5"

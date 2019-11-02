@@ -220,3 +220,4 @@ Describe the way tasks are allocated and tracked in your project
 - pagination gem
 - incrementing page views
 - seed file
+- google API, geocoder gem, generating maps based off of suburb.
