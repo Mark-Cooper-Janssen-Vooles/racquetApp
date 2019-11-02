@@ -1,6 +1,8 @@
 nav {
   height: 31px;
-  background: rgb(30, 46, 227);
+  // background: rgb(30, 46, 227);
+  // box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  border: 1px solid rgba(0,0,0,0.2);
   display: flex;
   justify-content: space-between;
   align-items: center;

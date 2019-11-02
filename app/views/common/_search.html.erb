@@ -1,3 +1,5 @@
+<script src="https://kit.fontawesome.com/857aed0774.js" crossorigin="anonymous"></script>
+
 <div class="search-bar">
 
   <div class="logo">
@@ -8,7 +10,10 @@
       <% @q = Racquet.ransack(params[:q]) %>
       <%= search_form_for @q, url: search_racquets_path, html: { method: :post } do |f| %>
 
-        <%= f.search_field :description_or_length_or_balance_or_stiffness_or_string_pattern_or_head_size_or_brand_or_title_cont, class: "search-input"%>
+        <div class=search-input>
+          <%= f.search_field :description_or_length_or_balance_or_stiffness_or_string_pattern_or_head_size_or_brand_or_title_cont, class: "search-input2"%>
+          <i class="fas fa-search"></i>
+        </div>
 
         <%#= f.search_field :brand_cont, class: "search-input"%>
 

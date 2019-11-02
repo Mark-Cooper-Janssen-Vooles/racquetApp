@@ -27,6 +27,9 @@ class PaymentsController < ApplicationController
     @racquet.status.buyer_user_id_id = @user.id
     @racquet.save
 
+    #alert racquet owner of purchase 
+    #send email?
+
     # byebug
 
     #status 200 erroring out??? should have above @racquet stuff after status 200 but it never gets there.

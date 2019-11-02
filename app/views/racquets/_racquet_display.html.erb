@@ -1,9 +1,11 @@
 <% if @racquets.count == 0 %>
-  There are no racquets of this brand for sale to display yet!
+  There are no racquets of this type for sale to display yet!
 <% else %>
 
-<%= paginate @racquets, window: 2 %>
-<%= page_entries_info @racquets %>
+<div class="search-pagination">
+  <%= paginate @racquets, window: 2 %>
+  <div><%= page_entries_info @racquets %></div>
+</div>
 
 <div class="card-section">
   <% @racquets.each do |racquet| %>
@@ -20,7 +22,7 @@
       <div class="racquet-info">
         <div class="racquet-title-brand">
           <span><%= racquet.title %></span>
-          <span><%= racquet.brand.capitalize %></span>
+          <span class="the-brand"><%= racquet.brand.capitalize %></span>
         </div>
         <div class="racquet-price-fav">
           <span>$<%= racquet.price %></span>

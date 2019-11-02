@@ -3,7 +3,7 @@
 <div class="racquet-show-content">
 
   <div class="racquet-picture">
-      <%= image_tag(@racquet.picture, class: "index-image") if @racquet.picture.attached? %>
+      <%= image_tag(@racquet.picture, class: "show-image") if @racquet.picture.attached? %>
   </div>
 
   <div class="racquet-info">
@@ -34,9 +34,11 @@
         <% if @racquet.status.sold == true %>
           <span>SOLD</span>
         <% end %>
-        <span>Views: <%= @racquet.status.view_count %></span>
-        <span>Posted on: <%= @racquet.status.created_at.strftime("%Y-%m-%d") %></span>
-        <h3>Price: <%= @racquet.price %></h3>
+        <div class="head-info-line1">
+          <span>Posted on: <%= @racquet.status.created_at.strftime("%Y-%m-%d") %></span>
+          <span>Views: <%= @racquet.status.view_count %></span>
+        </div>
+        <h3>Price: $<%= @racquet.price %></h3>
       </div>
       <div class="body-info">
         <span>Description: <%= @racquet.description %></span>
@@ -44,7 +46,7 @@
       <div class="stats-info">
         <span>Head size: <%= @racquet.head_size %></span>
         <span>Length: <%= @racquet.length %></span>
-        <span>Strung Weigt: <%= @racquet.strung_weight %></span>
+        <span>Strung Weight: <%= @racquet.strung_weight %></span>
         <span>Balance: <%= @racquet.balance %></span>
         <span>Stiffness: <%= @racquet.stiffness %></span>
         <span>String Pattern: <%= @racquet.string_pattern %></span>
@@ -72,7 +74,10 @@
     </div>
     <div class="seller-body">
       <span><%= @seller_user.user_detail.description %></span>
-
+      <span>
+    </div>
+    <div class="seller-location">
+      <div class="googlemaps-api">GOOGLE MAPS API GOES HERE, use location data</div>
     </div>
   </div>
 

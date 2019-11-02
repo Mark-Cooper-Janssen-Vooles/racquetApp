@@ -10,13 +10,12 @@ require 'aws-sdk'
 
 one_to_ten = (1..10).to_a
 price = (50..320).to_a
+state_rand = ["VIC", "NSW", "WA", "TAS", "NT", "ACT", "QLD", "SA"]
+suburb = ["Melbourne", "Perth", "Sydney", "Hobart"]
 
 one_to_ten.each do |user|
   User.create(email: Faker::Internet.email, password: "password")
   UserDetail.create(name: Faker::Name.name, description: Faker::Lorem.sentence(word_count: 15),  user_id: user, user_type: 0)
-
-  state_rand = ["VIC", "NSW", "WA", "TAS", "NT", "ACT", "QLD", "SA"]
-  suburb = ["Melbourne", "Perth", "Sydney", "Hobart"]
 
   Location.create(state: state_rand.sample, suburb: suburb.sample, address_line: "123 fake street", postcode: "3000", user_detail_id: user)
 
@@ -51,7 +50,11 @@ end
 #admin user
 User.create(email: "admin@admin.com", password: "password")
 UserDetail.create(name: "admin", description: "the boss", user_id: 11, user_type: 1)
+#added recently - could cause issues?
+Location.create(state: state_rand.sample, suburb: suburb.sample, address_line: "123 fake street", postcode: "3000", user_detail_id: 11)
 
 #normal user
 User.create(email: "com@com.com", password: "password")
 UserDetail.create(name: "com", description: "a normal user", user_id: 12, user_type: 0)
+#added recently- could cause issues?
+Location.create(state: state_rand.sample, suburb: suburb.sample, address_line: "123 fake street", postcode: "3000", user_detail_id: 12)
