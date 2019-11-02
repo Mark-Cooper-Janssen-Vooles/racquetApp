@@ -2,6 +2,7 @@ class RacquetsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
   before_action :set_racquet, only: [:show]
   before_action :set_user_racquet, only: [:edit, :update, :destroy]
+  before_action :make_favourite, only: [:volkl, :technifibre, :prokennex, :prince, :gamma, :dunlop, :babolat, :yonex, :head, :wilson, :show]
 
   # GET /racquets
   # GET /racquets.json
@@ -49,8 +50,11 @@ class RacquetsController < ApplicationController
       cancel_url: "#{root_url}racquets"
       )
 
-  @session_id = session.id
+      @session_id = session.id
     end
+
+
+    @seller_user = User.find(@racquet.seller_user_id)
   end
 
   # GET /racquets/new
@@ -107,40 +111,54 @@ class RacquetsController < ApplicationController
   #individual brand pages: 
   brands = ["wilson", "head", "yonex", "babolat", "dunlop", "gamma", "prince", "prokennex", "technifibre", "volkl"]
   def wilson
-    @racquets = Racquet.where("brand = 'wilson'")
+    @racquets = Racquet.where("brand = 'wilson'").page(params[:page])
+                                                .per(5)
   end
   def head
-    @racquets = Racquet.where("brand = 'head'")
+    @racquets = Racquet.where("brand = 'head'").page(params[:page])
+                                                .per(5)
   end
   def yonex
-    @racquets = Racquet.where("brand = 'yonex'")
+    @racquets = Racquet.where("brand = 'yonex'").page(params[:page])
+                                                .per(5)
   end
   def babolat
-    @racquets = Racquet.where("brand = 'babolat'")
+    @racquets = Racquet.where("brand = 'babolat'").page(params[:page])
+                                                  .per(5)
   end
   def dunlop
-    @racquets = Racquet.where("brand = 'dunlop'")
+    @racquets = Racquet.where("brand = 'dunlop'").page(params[:page])
+                                                  .per(5)
   end
   def gamma
-    @racquets = Racquet.where("brand = 'gamma'")
+    @racquets = Racquet.where("brand = 'gamma'").page(params[:page])
+                                                .per(5)
   end
   def prince
-    @racquets = Racquet.where("brand = 'prince'")
+    @racquets = Racquet.where("brand = 'prince'").page(params[:page])
+                                                  .per(5)
   end
   def prokennex
-    @racquets = Racquet.where("brand = 'prokennex'")
+    @racquets = Racquet.where("brand = 'prokennex'").page(params[:page])
+                                                    .per(5)
   end
   def technifibre
-    @racquets = Racquet.where("brand = 'technifibre'")
+    @racquets = Racquet.where("brand = 'technifibre'").page(params[:page])
+                                                      .per(5)
   end
   def volkl
-    @racquets = Racquet.where("brand = 'volkl'")
+    @racquets = Racquet.where("brand = 'volkl'").page(params[:page])
+                                                .per(5)
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_racquet
       @racquet = Racquet.find(params[:id])
+    end
+
+    def make_favourite
+      @favourite = Favourite.new
     end
 
     def set_user_racquet

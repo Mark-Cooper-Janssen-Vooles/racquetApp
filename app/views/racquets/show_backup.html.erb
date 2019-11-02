@@ -1,0 +1,119 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Views:</strong>
+  <%= @racquet.status.view_count %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @racquet.title %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @racquet.price %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @racquet.seller_user_id %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @racquet.status %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @racquet.description %>
+</p>
+
+<p>
+  <strong>Head size:</strong>
+  <%= @racquet.head_size %>
+</p>
+
+<p>
+  <strong>Length:</strong>
+  <%= @racquet.length %>
+</p>
+
+<p>
+  <strong>Strung weight:</strong>
+  <%= @racquet.strung_weight %>
+</p>
+
+<p>
+  <strong>Balance:</strong>
+  <%= @racquet.balance %>
+</p>
+
+<p>
+  <strong>Stiffness:</strong>
+  <%= @racquet.stiffness %>
+</p>
+
+<p>
+  <strong>String pattern:</strong>
+  <%= @racquet.string_pattern %>
+</p>
+
+<p>
+  <strong>Brand:</strong>
+  <%= @racquet.brand %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @racquet.racquet_type %>
+</p>
+
+<div class="show-image-card">
+  <%= image_tag(@racquet.picture, class: "show-image") if @racquet.picture.attached? %>
+</div>
+
+<% if user_signed_in? %>
+
+  <%= form_with(model: @favourite, local: true, url: favourites_path) do |form| %>
+    <div class="field">
+      <%# this needs to default to the logged in users id! %>
+      <%= form.hidden_field(:user_id, :value => current_user.id) %>
+    </div>
+
+    <div class="field">
+      <%# this needs to default to the logged in users id! %>
+      <%= form.hidden_field(:racquet_id, :value => @racquet.id) %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit "Favourite" %>
+    </div>
+  <% end %>
+
+<% end %>
+
+<% if user_signed_in? && @racquet.seller_user_id == current_user.id %>
+  <%= link_to 'Edit', edit_racquet_path(@racquet) %>
+<% elsif user_signed_in? %>
+  <button data-stripe="payment">Buy this racquet <%= number_to_currency(@racquet.price) %></button>
+<% end %>
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+  document
+    .querySelector("[data-stripe='payment']")
+    .addEventListener("click", () => {
+      const stripe = Stripe(
+        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+      );
+
+      stripe.redirectToCheckout({
+        sessionId: "<%= @session_id %>"
+      });
+    });
+</script>
+
+<%= link_to 'Back', racquets_path %>

@@ -3,14 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .show-image {
-  border: 1px solid black;
-  width: 200px;
-  height: 200px;
+  // border: 1px solid black;
+  width: 300px;
+  height: 300px;
 }
 
 .index-image {
-  border: 1px solid black;
-  width: 100px;
+  // border: 1px solid black;
+  // width: 100px;
+  height: 150px;
 }
 
 .pagination {
@@ -24,6 +25,7 @@
   }
 }
 
+// styling for index page brand selection 
 .brand-selection {
   display: flex;
   justify-content: space-between;
@@ -44,7 +46,7 @@
 
     }
     .image {
-      height: 50px;
+      height: 200px;
       width: 50px;
       background: white;
       border-radius: 25px;
@@ -52,10 +54,126 @@
   }
 }
 
-.sold {
-  color: grey;
-  background:red; 
-  height: 100px;
-  width: 100%;
-  margin-bottom: 5px;
+
+// Styling for index page racquets
+.card-section {
+  display: flex;
+  // background: red;
+  margin-right: 20px;
+
+  // if card not sold
+  .racquet-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 300px;
+    width: 20%;
+    margin-left: 10px;
+    .racquet-picture {
+      height: 50%;
+      width: 100%;
+      // background: blue;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .racquet-info {
+      background: rgb(175, 175, 222);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      // margin-left: 5px;
+      // margin-right: 5px;
+      width: 100%;
+      height: 50%;
+      .racquet-title-brand {
+        display: flex;
+        justify-content: space-between;
+        height: 20px;
+        width: 100%;
+        border-bottom: 1px solid black;
+        // background: rgb(0, 255, 0);
+      }
+      .racquet-price-fav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 20px;
+        width: 100%;
+        border-bottom: 1px solid black;
+        // background: rgb(242, 0, 255);
+      }
+    }
+  }
+
+  // if card sold
+  .racquet-card-sold {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 300px;
+    width: 20%;
+    margin-left: 10px;
+
+    .racquet-picture {
+      height: 50%;
+      width: 100%;
+      // background: blue;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
+    }
+    .racquet-info {
+      background: rgba(0, 0, 0, 0.338);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      // margin-left: 5px;
+      // margin-right: 5px;
+      width: 100%;
+      height: 50%;
+      .racquet-title-brand {
+        display: flex;
+        justify-content: space-between;
+        height: 20px;
+        width: 100%;
+        border-bottom: 1px solid black;
+        // background: rgb(0, 255, 0);
+      }
+      .racquet-price-fav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 20px;
+        width: 100%;
+        border-bottom: 1px solid black;
+        // background: rgb(242, 0, 255);
+      }
+      .racquet-description {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 110px;
+        span {
+          color: red
+        }
+      }
+    }
+  }
+}
+
+// styling for show page racquet 
+.racquet-show-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  
 }

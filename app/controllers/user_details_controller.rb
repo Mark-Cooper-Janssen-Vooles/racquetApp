@@ -22,6 +22,10 @@ class UserDetailsController < ApplicationController
   def show
   end
 
+  def previous_purchases
+      @purchases = Status.where("buyer_user_id_id = '#{current_user.id}'")
+  end
+
   # GET /user_details/new
   def new
     @user_detail = UserDetail.new

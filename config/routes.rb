@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :favourites
   resources :locations
   resources :user_details
+  get 'purchases', to: 'user_details#previous_purchases'
   resources :shopping_carts
 
   resources :racquets do

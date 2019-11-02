@@ -49,6 +49,7 @@
 
 <br><br>
 <% if user_signed_in? && current_user.user_detail.id == @user_detail.id %>
+  <%= link_to("View Previous Purchases", purchases_path)%> |
   <%= link_to 'Edit Profile', edit_user_detail_path(@user_detail) %> | 
   <%= link_to 'Delete Profile', @user_detail, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>

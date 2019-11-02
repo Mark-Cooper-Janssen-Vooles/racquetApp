@@ -4,10 +4,11 @@ class PaymentsController < ApplicationController
   def success
     @racquet = Racquet.find(params[:racquetId])
     @user = User.find(params[:userId]).user_detail
+    # raise 
+    
   end
 
   def webhook
-
     payment_id= params[:data][:object][:payment_intent]
     payment = Stripe::PaymentIntent.retrieve(payment_id)
     racquet_id = payment.metadata.racquet_id
@@ -18,13 +19,18 @@ class PaymentsController < ApplicationController
     p "user id " + user_id
     p "---------------------------------------"
 
-    status 200
-
     @racquet = Racquet.find(racquet_id)
     @user = User.find(user_id).user_detail
 
+    #don't know whats happening here? not updating properly. something to do with webhook i think.
     @racquet.status.sold = true
+    @racquet.status.buyer_user_id_id = @user.id
     @racquet.save
+
+    # byebug
+
+    #status 200 erroring out??? should have above @racquet stuff after status 200 but it never gets there.
+    # status 200
   end
 
 end
