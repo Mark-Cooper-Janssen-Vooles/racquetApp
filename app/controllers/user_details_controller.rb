@@ -40,9 +40,11 @@ class UserDetailsController < ApplicationController
   # POST /user_details.json
   def create
     @user_detail = UserDetail.new(user_detail_params)
-
+    @user_detail.location.state.upcase
+    @user_detail.location.suburb.upcase
     #create coords based on suburb
     suburb = @user_detail.location.suburb
+
     coords = Geocoder.search(suburb).first.coordinates
     @user_detail.location.latitude = coords[0].to_d
     @user_detail.location.longitude = coords[1].to_d
@@ -63,8 +65,24 @@ class UserDetailsController < ApplicationController
   # PATCH/PUT /user_details/1
   # PATCH/PUT /user_details/1.json
   def update
+
+    # @user_detail.location.state.upcase
+    # @user_detail.location.suburb.upcase
+    # #create coords based on suburb
+    # suburb = @user_detail.location.suburb
+
+    # raise
+    # coords = Geocoder.search(suburb).first.coordinates
+    # @user_detail.location.latitude = coords[0].to_d
+    # @user_detail.location.longitude = coords[1].to_d
+
+    # @user_detail.save
     respond_to do |format|
+
+      @user_detail.location.suburb = params[:user_detail][:location_attributes][:suburb].upcase
+      # raise
       if @user_detail.update(user_detail_params)
+
         format.html { redirect_to @user_detail, notice: 'User detail was successfully updated.' }
         format.json { render :show, status: :ok, location: @user_detail }
       else
@@ -80,7 +98,7 @@ class UserDetailsController < ApplicationController
 
     @user_detail.destroy
     respond_to do |format|
-      format.html { redirect_to user_details_url, notice: 'User detail was successfully destroyed.' }
+      format.html { redirect_to new_user_detail_path, notice: 'User detail was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

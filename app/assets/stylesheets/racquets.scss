@@ -262,6 +262,9 @@
     }
     .seller-body {
       height: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .seller-location {
       display: flex;
