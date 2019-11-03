@@ -115,12 +115,14 @@ class UserDetailsController < ApplicationController
     end
 
     def update_coords_based_on_suburb
-      suburb = @user_detail.location.suburb
-      coords = Geocoder.search(suburb).first.coordinates
-      @user_detail.location.latitude = coords[0].to_d
-      @user_detail.location.longitude = coords[1].to_d
-  
-      @user_detail.save
+      if @user_detail.location.suburb != ""
+        suburb = @user_detail.location.suburb
+        coords = Geocoder.search(suburb).first.coordinates
+        @user_detail.location.latitude = coords[0].to_d
+        @user_detail.location.longitude = coords[1].to_d
+    
+        @user_detail.save
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

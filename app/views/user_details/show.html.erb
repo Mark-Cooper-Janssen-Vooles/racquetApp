@@ -6,8 +6,6 @@
     </script>
 <% end %>
 
-<p id="notice"><%= notice %></p>
-
 <% if @user_detail.user_type == "admin" %>
   <h1>Admin Dashboard:</h1>
   <%= link_to("See users index", user_details_path)%> | <%= link_to("See racquets index", racquets_path)%>
@@ -59,6 +57,7 @@
       <%= racquet.description %>
       <%= image_tag(racquet.picture, class: "index-image") if racquet.picture.attached? %>
     </div>
+    <%= link_to("Show Racquet",  racquet_path(racquet.id)) %>
   <% end %>
 <% end %>
 

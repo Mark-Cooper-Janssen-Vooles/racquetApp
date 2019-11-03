@@ -28,6 +28,8 @@ class Location < ApplicationRecord
 
   validates_inclusion_of :postcode, :in => valid_postcodes
 
+  validates :postcode, :suburb, :address_line, :state, presence: true
+
 end
 
 

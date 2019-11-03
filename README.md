@@ -223,3 +223,4 @@ Describe the way tasks are allocated and tracked in your project
 - google API, geocoder gem, generating maps based off of suburb.
 - using "Ausburbs" to create a pre-defined list of suburbs and states 
 - using Javascript to force entry into input fields to be capitalized 
+- Used RSPEC / capybara for TDD for model validations
