@@ -12,64 +12,72 @@
   <br>
 <% end %>
 
-
-  <div class="racquet-picture">
-      <%= image_tag(@user_detail.picture, class: "show-image") if @user_detail.picture.attached? %>
+<div class="top-content">
+  <div class="user-picture">
+        <%= image_tag(@user_detail.picture, class: "show-image") if @user_detail.picture.attached? %>
   </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user_detail.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @user_detail.description %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= current_user.email %>
-</p>
-
-<% if @user_detail.location %>
-  <p>
-    <strong>Location:</strong>
-    <% if user_signed_in? && current_user.user_detail.id == @user_detail.id %>
-      <%= @user_detail.location.address_line %> |
-    <% end %>
-    <%= @user_detail.location.postcode %> |
-    <%= @user_detail.location.suburb %> |
-    <%= @user_detail.location.state %>
-<% else %>
-  <%= link_to("Add your location", new_location_path) %>
-<% end %>
-
-<br>
-
-<p><strong>Racquet listings: </strong></p>
-<% if @user_detail.user.racquets.count == 0 %>
-  You haven't listed any racquets yet - 
-  <%= link_to("List a racquet for sale", new_racquet_path)%>
-<% else %>
-  <% @user_detail.user.racquets.each do |racquet| %>
-    <div>
-      <%= racquet.description %>
-      <%= image_tag(racquet.picture, class: "index-image") if racquet.picture.attached? %>
+  <div class="user-info">
+    <div class="header">
+      <h1><%= @user_detail.name %></h1>
+      <span>Contact user:<%= current_user.email %></span>
     </div>
-    <%= link_to("Show Racquet",  racquet_path(racquet.id)) %>
-  <% end %>
-<% end %>
 
-<br><br>
-<% if user_signed_in? && current_user.user_detail.id == @user_detail.id %>
-  <%= link_to("View Sales", sales_path)%> |
-  <%= link_to("View Purchases", purchases_path)%> |
-  <%= link_to 'Edit Profile', edit_user_detail_path(@user_detail) %> | 
-  <%= link_to 'Delete Profile', @user_detail, method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
+    <div class="body">
+      <div class="info">
+        <div class="top-info">
+          <div>
+            <strong>Description:</strong>
+            <%= @user_detail.description %>
+          </div>
+          <div>
+            <% if @user_detail.location %>
+              
+                <strong>Location:</strong>
+                <% if user_signed_in? && current_user.user_detail.id == @user_detail.id %>
+                  <%= @user_detail.location.address_line %> |
+                <% end %>
+                <%= @user_detail.location.postcode %> |
+                <%= @user_detail.location.suburb %> |
+                <%= @user_detail.location.state %>
+            <% else %>
+              <%= link_to("Add your location", new_location_path) %>
+            <% end %>
+          </div>
+        </div>
 
-
-      <div class="googlemaps-api">
+        <div class="links">
+          <% if user_signed_in? && current_user.user_detail.id == @user_detail.id %>
+            <%= link_to("View Sales", sales_path)%> |
+            <%= link_to("View Purchases", purchases_path)%> |
+            <%= link_to 'Edit Profile', edit_user_detail_path(@user_detail) %> | 
+            <%= link_to 'Delete Profile', @user_detail, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </div>
+      </div>
+      <div class="maps">
             <div id="map"></div>
       </div>
+    </div>
+  
+  </div>
+</div>
+
+<p><strong>Racquet listings: </strong></p>
+<div class="listings">
+  <% if @user_detail.user.racquets.count == 0 %>
+  You haven't listed any racquets yet - 
+    <%= link_to("List a racquet for sale", new_racquet_path)%>
+  <% else %>
+    <% @user_detail.user.racquets.each do |racquet| %>
+      <div class="racquet-card">
+          <%= image_tag(racquet.picture, class: "rac-image") if racquet.picture.attached? %>
+          <div class="racquet-info">
+            <%= racquet.title %>
+            <p>$<%= racquet.price %></p>
+            <%= link_to("Show Racquet",  racquet_path(racquet.id)) %>
+          </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

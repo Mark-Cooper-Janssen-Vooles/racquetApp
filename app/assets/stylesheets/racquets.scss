@@ -248,24 +248,38 @@
       }
     }
   }
+
   .seller-info {
     padding: 5px;
     margin-left: 10px;
     width: 33%;
     height: 100%;
     border: 1px solid rgba(0,0,0,0.2);
-    .seller-title {
+    .seller-info-nested {
       display: flex;
-      flex-direction: column;
-      margin-bottom: 5px;
-      height: 40px;
-    }
-    .seller-body {
-      height: 80px;
-      display: flex;
-      flex-direction: column;
       justify-content: space-between;
+      align-items: flex-start;
+      .title {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-bottom: 5px;
+        height: 40px;
+        height: 125px;
+        width: 70%;
+        flex-wrap: wrap;
+        .description {
+          width: 100%;
+          overflow-wrap: normal;
+          
+        }
+      }
+      .user-image {
+        height: 120px;
+        background: red;
+      }
     }
+    
     .seller-location {
       display: flex;
       justify-content: center;

@@ -75,15 +75,17 @@
 
   <div class="seller-info">
     <div class="seller-title">
-      <span>Posted by <%= @seller_user.user_detail.name %></span>
-      <span>Joined: <%= @seller_user.user_detail.created_at.strftime("%Y-%m-%d")%></span>
+      <div class="seller-info-nested">
+        <div class="title">
+          <span>Posted by <%= @seller_user.user_detail.name %></span>
+          <span>Joined: <%= @seller_user.user_detail.created_at.strftime("%Y-%m-%d")%></span>
+           <span><%= link_to("View Users Profile", user_detail_path(@seller_user.user_detail.id))%></span>
+          <span class="description"><%= @seller_user.user_detail.description %></span>
+        </div>
+        <%= image_tag(@seller_user.user_detail.picture, class: "user-image") if @seller_user.user_detail.picture.attached? %>
+      </div>
     </div>
-    <div class="seller-body">
-      <span><%= link_to("View Users Profile", user_detail_path(@seller_user.id))%></span>
-      <span><%= @seller_user.user_detail.description %></span>
-      <span>
-      <span>Racquet Location:</span>
-    </div>
+
     <div class="seller-location">
       <div class="googlemaps-api">
             <div id="map"></div>
