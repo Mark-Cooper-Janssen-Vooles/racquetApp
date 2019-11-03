@@ -75,6 +75,12 @@ class RacquetsController < ApplicationController
       if @racquet.save
         Status.create(sold: false, racquet_id: @racquet.id, view_count: 0)
 
+        if @racquet.picture.attached? == false
+          racquet_image = "default.png"
+          @racquet.picture.attach(io: File.open("app/assets/images/racquets/#{racquet_image}"), filename: "#{racquet_image}")
+          @racquet.save
+        end
+
         format.html { redirect_to @racquet, notice: 'Racquet was successfully created.' }
         format.json { render :show, status: :created, location: @racquet }
       else

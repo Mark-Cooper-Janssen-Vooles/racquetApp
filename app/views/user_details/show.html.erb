@@ -14,6 +14,11 @@
   <br>
 <% end %>
 
+
+  <div class="racquet-picture">
+      <%= image_tag(@user_detail.picture, class: "show-image") if @user_detail.picture.attached? %>
+  </div>
+
 <p>
   <strong>Name:</strong>
   <%= @user_detail.name %>
@@ -32,9 +37,11 @@
 <% if @user_detail.location %>
   <p>
     <strong>Location:</strong>
-    <%= @user_detail.location.address_line %> |
-    <%= @user_detail.location.address_line %> |
+    <% if user_signed_in? && current_user.user_detail.id == @user_detail.id %>
+      <%= @user_detail.location.address_line %> |
+    <% end %>
     <%= @user_detail.location.postcode %> |
+    <%= @user_detail.location.suburb %> |
     <%= @user_detail.location.state %>
 <% else %>
   <%= link_to("Add your location", new_location_path) %>
@@ -57,7 +64,8 @@
 
 <br><br>
 <% if user_signed_in? && current_user.user_detail.id == @user_detail.id %>
-  <%= link_to("View Previous Purchases", purchases_path)%> |
+  <%= link_to("View Sales", sales_path)%> |
+  <%= link_to("View Purchases", purchases_path)%> |
   <%= link_to 'Edit Profile', edit_user_detail_path(@user_detail) %> | 
   <%= link_to 'Delete Profile', @user_detail, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :locations
   resources :user_details
   get 'purchases', to: 'user_details#previous_purchases'
+  get 'sales', to: 'user_details#sales'
   resources :shopping_carts
 
   resources :racquets do

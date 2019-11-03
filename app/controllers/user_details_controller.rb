@@ -26,6 +26,10 @@ class UserDetailsController < ApplicationController
       @purchases = Status.where("buyer_user_id_id = '#{current_user.id}'")
   end
 
+  def sales
+    @sales = Racquet.where("seller_user_id = '#{current_user.id}'") && Status.where("sold = 'true'")
+  end
+
   # GET /user_details/new
   def new
     @user_detail = UserDetail.new
@@ -40,19 +44,21 @@ class UserDetailsController < ApplicationController
   # POST /user_details.json
   def create
     @user_detail = UserDetail.new(user_detail_params)
-    @user_detail.location.state.upcase
-    @user_detail.location.suburb.upcase
-    #create coords based on suburb
-    suburb = @user_detail.location.suburb
+    update_coords_based_on_suburb
+    
 
-    coords = Geocoder.search(suburb).first.coordinates
-    @user_detail.location.latitude = coords[0].to_d
-    @user_detail.location.longitude = coords[1].to_d
 
-    @user_detail.save
 
     respond_to do |format|
       if @user_detail.save
+
+        if @user_detail.picture.attached? == false 
+          one_to_seven = (1..7).to_a 
+          user_image = "user#{one_to_seven.sample}.png"
+          @user_detail.picture.attach(io: File.open("app/assets/images/users/#{user_image}"), filename: "#{user_image}")
+          @user_detail.save
+        end
+
         format.html { redirect_to user_detail_path(@user_detail.id), notice: 'User detail was successfully created.' }
         format.json { render :show, status: :created, location: @user_detail }
       else
@@ -65,23 +71,10 @@ class UserDetailsController < ApplicationController
   # PATCH/PUT /user_details/1
   # PATCH/PUT /user_details/1.json
   def update
-
-    # @user_detail.location.state.upcase
-    # @user_detail.location.suburb.upcase
-    # #create coords based on suburb
-    # suburb = @user_detail.location.suburb
-
-    # raise
-    # coords = Geocoder.search(suburb).first.coordinates
-    # @user_detail.location.latitude = coords[0].to_d
-    # @user_detail.location.longitude = coords[1].to_d
-
-    # @user_detail.save
     respond_to do |format|
 
-      @user_detail.location.suburb = params[:user_detail][:location_attributes][:suburb].upcase
-      # raise
       if @user_detail.update(user_detail_params)
+        update_coords_based_on_suburb
 
         format.html { redirect_to @user_detail, notice: 'User detail was successfully updated.' }
         format.json { render :show, status: :ok, location: @user_detail }
@@ -121,8 +114,17 @@ class UserDetailsController < ApplicationController
       end
     end
 
+    def update_coords_based_on_suburb
+      suburb = @user_detail.location.suburb
+      coords = Geocoder.search(suburb).first.coordinates
+      @user_detail.location.latitude = coords[0].to_d
+      @user_detail.location.longitude = coords[1].to_d
+  
+      @user_detail.save
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_detail_params
-      params.require(:user_detail).permit(:name, :description, :user_id, :user_type, location_attributes: [:state, :suburb, :address_line, :postcode])
+      params.require(:user_detail).permit(:name, :description, :user_id, :user_type, :picture, location_attributes: [:state, :suburb, :address_line, :postcode])
     end
 end

@@ -15,10 +15,15 @@ suburb = ["Melbourne", "Perth", "Hobart"]
 
 one_to_ten.each do |user|
   User.create(email: Faker::Internet.email, password: "password")
-  UserDetail.create(name: Faker::Name.name, description: Faker::Lorem.sentence(word_count: 15),  user_id: user, user_type: 0)
+  user_detail = UserDetail.create(name: Faker::Name.name, description: Faker::Lorem.sentence(word_count: 15),  user_id: user, user_type: 0)
+
+  one_to_seven = (1..7).to_a 
+  user_image = "user#{one_to_seven.sample}.png"
+  user_detail.picture.attach(io: File.open("app/assets/images/users/#{user_image}"), filename: "#{user_image}")
+  user_detail.save
 
   1.times do |thing|
-    suburb1 = suburb.sample
+    suburb1 = suburb.sample.upcase
     Location.create(state: state_rand.sample, suburb: suburb1, address_line: "123 fake street", postcode: "3000", user_detail_id: user, latitude: Geocoder.search(suburb1).first.coordinates[0].to_d, longitude: Geocoder.search(suburb1).first.coordinates[1].to_d)
   end
 
@@ -50,14 +55,16 @@ one_to_ten.each do |user|
   end
 end
 
+suburb2 = suburb.sample.upcase
+
 #admin user
 User.create(email: "admin@admin.com", password: "password")
 UserDetail.create(name: "admin", description: "the boss", user_id: 11, user_type: 1)
 #added recently - could cause issues?
-Location.create(state: state_rand.sample, suburb: suburb.sample, address_line: "123 fake street", postcode: "3000", user_detail_id: 11)
+Location.create(state: state_rand.sample, suburb: suburb2, address_line: "123 fake street", postcode: "3000", user_detail_id: 11, latitude: Geocoder.search(suburb2).first.coordinates[0].to_d, longitude: Geocoder.search(suburb2).first.coordinates[1].to_d)
 
 #normal user
 User.create(email: "com@com.com", password: "password")
 UserDetail.create(name: "com", description: "a normal user", user_id: 12, user_type: 0)
 #added recently- could cause issues?
-Location.create(state: state_rand.sample, suburb: suburb.sample, address_line: "123 fake street", postcode: "3000", user_detail_id: 12)
+Location.create(state: state_rand.sample, suburb: suburb2, address_line: "123 fake street", postcode: "3000", user_detail_id: 12, latitude: Geocoder.search(suburb2).first.coordinates[0].to_d, longitude: Geocoder.search(suburb2).first.coordinates[1].to_d)

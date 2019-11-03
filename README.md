@@ -1,5 +1,3 @@
-2 tomato
-
 Rails project order of operations:
 - Entity relationship diagram (lucid chart) (DONE)
 - Wire frames - (going to be an eBay clone) - do three and then move on to site map. (figma)(DONE)
@@ -81,7 +79,8 @@ Internal messaging system between users (if there is time)
 ![Sitemap](/docs/sitemap_racquetapp.png "Sitemap")
 
 * Screenshots: 
-(put completed website screenshots here)
+![Screenshot](/docs/screenshot1.png "Screenshot")
+![Screenshot](/docs/screenshot2.png "Screenshot")
 
 * Target Audience: 
 (add more info)
@@ -213,6 +212,7 @@ Describe the way tasks are allocated and tracked in your project
 ![Trello](/docs/trello2.png "Trello")
 ![Trello](/docs/trello3.png "Trello")
 ![Trello](/docs/trello4.png "Trello")
+![Trello](/docs/trello5.png "Trello")
 
 ### Things to talk about in presentation
 - delete_duplicates in favourites controller
@@ -223,4 +223,3 @@ Describe the way tasks are allocated and tracked in your project
 - google API, geocoder gem, generating maps based off of suburb.
 - using "Ausburbs" to create a pre-defined list of suburbs and states 
 - using Javascript to force entry into input fields to be capitalized 
-- 

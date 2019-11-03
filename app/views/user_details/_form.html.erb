@@ -21,6 +21,12 @@
     <%= form.text_area :description %>
   </div>
 
+    <%# add photos %>
+  <div class="field">
+    <%= form.label :picture %> <%= form.file_field :picture, accept:
+    'image/png,image/gif,image/jpeg,image/jpg' %>
+  </div>
+
   <div class="field">
     <%# this needs to default to the logged in users id! %>
     <%= form.hidden_field(:user_id, :value => current_user.id) %>

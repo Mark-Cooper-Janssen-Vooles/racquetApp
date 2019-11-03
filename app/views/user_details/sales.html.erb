@@ -1,0 +1,38 @@
+<h1>Sales</h1>
+<br>
+
+<% total_sales = [] %>
+
+<div class="card-section">
+<% @sales.each do |status| %>
+      <div class="racquet-card">
+      <div class="racquet-picture">
+        <%= link_to status.racquet do %>
+          <%= image_tag(status.racquet.picture, class: "index-image") if status.racquet.picture.attached? %>
+        <% end %>
+      </div>
+      <div class="racquet-info">
+        <div class="racquet-title-brand">
+          <span><%= status.racquet.title %></span>
+          <span><%= status.racquet.brand.capitalize %></span>
+        </div>
+        <div class="racquet-price-fav">
+          <span>$<%= status.racquet.price %></span>
+          <% total_sales.push(status.racquet.price) %>
+        </div>
+        <div class="racquet-description">
+          <%= status.racquet.description %>
+          <% if status.racquet.status.sold == true %>
+            <span>SOLD TO <%= User.find(status.buyer_user_id_id).email %> </span>
+            <span><%= link_to("View buyers profile", user_detail_path(status.buyer_user_id_id))%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  </div>
+
+<br>
+<div>
+  Total racquet sales made: $<%= total_sales.sum %>
+</div>
