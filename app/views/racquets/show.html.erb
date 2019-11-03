@@ -1,11 +1,3 @@
-<% provide :head_tags do %>
-    <script>
-    document.addEventListener("DOMContentLoaded", function(){
-        initMap(<%=@seller_user.user_detail.location.latitude%>, <%=@seller_user.user_detail.location.longitude%>)
-    });
-    </script>
-<% end %>
-
 <div class="racquet-show-content">
 
   <div class="racquet-picture">
@@ -110,3 +102,11 @@
       });
     });
 </script>
+
+<% provide :head_tags do %>
+    <script>
+    document.addEventListener("DOMContentLoaded", function(){
+        initMap(<%=@seller_user.user_detail.location.latitude%>, <%=@seller_user.user_detail.location.longitude%>)
+    });
+    </script>
+<% end %>

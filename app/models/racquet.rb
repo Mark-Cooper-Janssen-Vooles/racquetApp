@@ -1,7 +1,6 @@
 class Racquet < ApplicationRecord
   belongs_to :seller_user, class_name: 'User'
   has_one :status
-  has_many :shopping_carts
   has_one :favourite
 
   accepts_nested_attributes_for :favourite
@@ -13,8 +12,8 @@ class Racquet < ApplicationRecord
   validates :price, numericality: { only_float: true }
   validates :head_size, numericality: { greater_than: 200, less_than: 450 }, allow_blank: true 
   validates :length, numericality: { greater_than: 20, less_than: 35 }, allow_blank: true 
-  validates :strung_weight, numericality: { greater_than: -10, less_than: 15 }, allow_blank: true 
-  validates :balance, numericality: true, allow_blank: true 
+  validates :strung_weight, numericality: { greater_than: 225, less_than: 400 }, allow_blank: true 
+  validates :balance, numericality: { greater_than: -10, less_than: 15 }, allow_blank: true 
   validates :stiffness, numericality: { greater_than: 40, less_than: 95 }, allow_blank: true
 
 

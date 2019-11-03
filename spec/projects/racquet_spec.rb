@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+#acceptance testing
+
 #to run:
 # rspec spec/projects/racquet_spec.rb
 

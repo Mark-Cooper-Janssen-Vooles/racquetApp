@@ -1,5 +1,7 @@
 require 'rails_helper'
- 
+
+#acceptance testing
+
 #to run:
 # rspec spec/projects/user_spec.rb
 

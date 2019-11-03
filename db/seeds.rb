@@ -15,7 +15,7 @@ suburb = ["Melbourne", "Perth", "Hobart"]
 
 one_to_ten.each do |user|
   User.create(email: Faker::Internet.email, password: "password")
-  user_detail = UserDetail.create(name: Faker::Name.name, description: Faker::Lorem.sentence(word_count: 15),  user_id: user, user_type: 0)
+  user_detail = UserDetail.create(name: Faker::Name.name, description: Faker::Lorem.sentence(word_count: 10),  user_id: user, user_type: 0)
 
   one_to_seven = (1..7).to_a 
   user_image = "user#{one_to_seven.sample}.png"
@@ -28,9 +28,9 @@ one_to_ten.each do |user|
   end
 
   #in sq inch
-  head_size_rand = (85..135).to_a
+  head_size_rand = (201..459).to_a
   #in inches
-  length_rand = (27..29).to_a
+  length_rand = (21..34).to_a
   #in grams
   strung_weight_rand = (226..400).to_a
   balance_rand = (-10..10).to_a
@@ -59,12 +59,20 @@ suburb2 = suburb.sample.upcase
 
 #admin user
 User.create(email: "admin@admin.com", password: "password")
-UserDetail.create(name: "admin", description: "the boss", user_id: 11, user_type: 1)
+admin_detail = UserDetail.create(name: "admin", description: "the boss. the boss. the boss. the boss. the boss. the boss. the boss.", user_id: 11, user_type: 1)
 #added recently - could cause issues?
 Location.create(state: state_rand.sample, suburb: suburb2, address_line: "123 fake street", postcode: "3000", user_detail_id: 11, latitude: Geocoder.search(suburb2).first.coordinates[0].to_d, longitude: Geocoder.search(suburb2).first.coordinates[1].to_d)
+one_to_seven = (1..7).to_a 
+admin_image = "user#{one_to_seven.sample}.png"
+admin_detail.picture.attach(io: File.open("app/assets/images/users/#{admin_image}"), filename: "#{admin_image}")
+admin_detail.save
 
 #normal user
 User.create(email: "com@com.com", password: "password")
-UserDetail.create(name: "com", description: "a normal user", user_id: 12, user_type: 0)
+com_detail = UserDetail.create(name: "com", description: "a normal user. a normal user. a normal user. a normal user. a normal user. ", user_id: 12, user_type: 0)
 #added recently- could cause issues?
 Location.create(state: state_rand.sample, suburb: suburb2, address_line: "123 fake street", postcode: "3000", user_detail_id: 12, latitude: Geocoder.search(suburb2).first.coordinates[0].to_d, longitude: Geocoder.search(suburb2).first.coordinates[1].to_d)
+one_to_seven = (1..7).to_a 
+com_image = "user#{one_to_seven.sample}.png"
+com_detail.picture.attach(io: File.open("app/assets/images/users/#{com_image}"), filename: "#{com_image}")
+com_detail.save

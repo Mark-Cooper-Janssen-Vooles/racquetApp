@@ -6,7 +6,6 @@ class User < ApplicationRecord
 
   has_many :statuses
   has_many :racquets, foreign_key: :seller_user_id
-  has_many :shopping_carts
 
   has_one :user_detail
   has_one :favourite

@@ -1,29 +1,28 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Favourites</h1>
 <br>
 <% if @favourites.count == 0 %>
   <p>You have no favourites yet.</p>
 <% else %>
-  <table>
-    <thead>
-      <tr>
-        <th>Racquet</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
       <% @favourites.each do |favourite| %>
+
+      <div class="favourites-card">
+        <div class="image">
+        </div>
+
+        <div class="body">
+        </div>
+
+        <div class="links">
+        </div>
+      </div>
+
+
         <tr>
         <td><%= image_tag(favourite.racquet.picture, class: "index-image") if favourite.racquet.picture.attached? %></td>
           <td><%= favourite.racquet.description %></td>
           <td><%= favourite.racquet.brand %></td>
           <td><%= link_to 'Show', racquet_path(favourite.racquet.id) %></td>
-          <td><%= link_to 'Delete from favourites', favourite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
+          <%= link_to 'Delete from favourites', favourite, method: :delete, data: { confirm: 'Are you sure?' } %>
       <% end %>
-    </tbody>
-  </table>
   <br>
 <% end %>
