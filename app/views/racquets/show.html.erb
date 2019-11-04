@@ -54,6 +54,7 @@
       <div class="buy-button">
         <% if user_signed_in? && @racquet.seller_user_id == current_user.id %>
           <%= link_to 'Edit', edit_racquet_path(@racquet) %>
+          <%= link_to 'Delete Listing', @racquet, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% elsif user_signed_in? %>
           <% if @racquet.status.sold == false %>
             <button data-stripe="payment">Buy this racquet <%= number_to_currency(@racquet.price) %></button>

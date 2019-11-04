@@ -4,6 +4,13 @@ class PaymentsController < ApplicationController
   def success
     @racquet = Racquet.find(params[:racquetId])
     @user = User.find(params[:userId]).user_detail  
+
+    # @racquet = Racquet.find(racquet_id)
+    # @user = User.find(user_id).user_detail
+
+    @racquet.status.sold = true
+    @racquet.status.buyer_user_id_id = @user.id
+    @racquet.save
   end
 
   def webhook
@@ -17,13 +24,7 @@ class PaymentsController < ApplicationController
     p "user id " + user_id
     p "---------------------------------------"
 
-    @racquet = Racquet.find(racquet_id)
-    @user = User.find(user_id).user_detail
-
     #don't know whats happening here? not updating properly. something to do with webhook i think.
-    @racquet.status.sold = true
-    @racquet.status.buyer_user_id_id = @user.id
-    @racquet.save
 
     #alert racquet owner of purchase 
     #send email?
@@ -31,7 +32,7 @@ class PaymentsController < ApplicationController
     # byebug
 
     #status 200 erroring out??? should have above @racquet stuff after status 200 but it never gets there.
-    # status 200
+    status 200
   end
 
   private 

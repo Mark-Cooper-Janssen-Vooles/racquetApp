@@ -1,6 +1,6 @@
 class Racquet < ApplicationRecord
   belongs_to :seller_user, class_name: 'User'
-  has_one :status
+  has_one :status, :dependent => :destroy
   has_one :favourite
 
   accepts_nested_attributes_for :favourite

@@ -7,22 +7,31 @@
 
       <div class="favourites-card">
         <div class="image">
+          <%= image_tag(favourite.racquet.picture, class: "favourites-image") if favourite.racquet.picture.attached? %>
         </div>
 
         <div class="body">
+          <div class="title">
+            <h1><%= favourite.racquet.title %></h1>
+          </div>
+          <div class="info">
+            <span>$<%= favourite.racquet.price %></span>
+            <span><%= favourite.racquet.brand %></span>
+            <span><%= favourite.racquet.description %></span>
+          </div>
         </div>
 
         <div class="links">
+          <% if favourite.racquet.status.sold == true %>
+            <span class="sold"> SOLD </span>
+          <% else %>
+            <span> Available for purchase. </span>
+          <% end %>
+          <span><%= link_to 'Show', racquet_path(favourite.racquet.id) %></span>
+          <span><%= link_to 'Delete from favourites', favourite, method: :delete, data: { confirm: 'Are you sure?' } %></span>
         </div>
+
       </div>
-
-
-        <tr>
-        <td><%= image_tag(favourite.racquet.picture, class: "index-image") if favourite.racquet.picture.attached? %></td>
-          <td><%= favourite.racquet.description %></td>
-          <td><%= favourite.racquet.brand %></td>
-          <td><%= link_to 'Show', racquet_path(favourite.racquet.id) %></td>
-          <%= link_to 'Delete from favourites', favourite, method: :delete, data: { confirm: 'Are you sure?' } %>
       <% end %>
   <br>
 <% end %>
