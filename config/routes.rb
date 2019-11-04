@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'messages/index'
+  get 'conversations/index'
   resources :favourites
   resources :locations
   resources :user_details
@@ -33,6 +35,11 @@ Rails.application.routes.draw do
 
   get "/payments/success", to: "payments#success"
   post "/payments/webhook", to: "payments#webhook"
+
+  resources :conversations, only: [:index, :create] do
+    resources :messages, only: [:index, :create]
+  end
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end
