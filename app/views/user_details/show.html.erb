@@ -8,7 +8,7 @@
 
 <% if @user_detail.user_type == "admin" %>
   <h1>Admin Dashboard:</h1>
-  <%= link_to("See users index", user_details_path)%> | <%= link_to("See racquets index", racquets_path)%>
+  <%= link_to("See users index", user_details_path)%> | <%= link_to("See racquets index", racquets_admin_index_path)%>
   <br>
 <% end %>
 
@@ -20,7 +20,7 @@
   <div class="user-info">
     <div class="header">
       <h1><%= @user_detail.name %></h1>
-      <span>Contact user:<%= current_user.email %></span>
+      <span>Contact user: <%= current_user.email %></span>
     </div>
 
     <div class="body">

@@ -59,6 +59,10 @@ one_to_ten.each do |user|
   # end
 end
 
+#make favourites
+12.times do |i|
+  Favourite.create(user_id: one_to_ten.sample, racquet_id: one_to_ten.sample )
+end
 
 suburb2 = suburb.sample.upcase
 

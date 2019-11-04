@@ -23,8 +23,8 @@
         <td><%= user_detail.location %></td>
         <td><%= user_detail.user_type %></td>
         <td><%= link_to 'Show', user_detail %></td>
-        <td><%= link_to 'Edit', edit_user_detail_path(user_detail) %></td>
-        <td><%= link_to 'Delete Profile', user_detail_path(user_detail), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_user_detail_path(user_detail.id) %></td>
+        <td><%= link_to 'Delete Profile', user_detail_path(user_detail.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

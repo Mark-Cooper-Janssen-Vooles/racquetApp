@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     end
       post :increment_page_views
   end
+  get 'racquets_admin_index', to: 'racquets#admin_index'
 
   resources :statuses
   devise_for :users, controllers: { registrations: "registrations" }

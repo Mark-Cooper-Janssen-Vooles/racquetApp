@@ -14,6 +14,10 @@ class RacquetsController < ApplicationController
     @favourite = Favourite.new
   end
 
+  def admin_index
+    @racquets = Racquet.all
+  end
+
   def search
     index
     render :index
@@ -70,17 +74,14 @@ class RacquetsController < ApplicationController
   # POST /racquets.json
   def create
     @racquet = Racquet.new(racquet_params)
-
     respond_to do |format|
       if @racquet.save
         Status.create(sold: false, racquet_id: @racquet.id, view_count: 0)
-
         if @racquet.picture.attached? == false
           racquet_image = "default.png"
           @racquet.picture.attach(io: File.open("app/assets/images/racquets/#{racquet_image}"), filename: "#{racquet_image}")
           @racquet.save
         end
-
         format.html { redirect_to @racquet, notice: 'Racquet was successfully created.' }
         format.json { render :show, status: :created, location: @racquet }
       else
@@ -185,6 +186,4 @@ class RacquetsController < ApplicationController
     def racquet_params
       params.require(:racquet).permit(:seller_user_id, :description, :head_size, :length, :strung_weight, :balance, :stiffness, :string_pattern, :brand, :racquet_type, :picture, :title, :price)
     end
-
-
 end

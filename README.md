@@ -82,6 +82,8 @@ Internal messaging system between users (if there is time)
 * Screenshots: 
 ![Screenshot](/docs/screenshot1.png "Screenshot")
 ![Screenshot](/docs/screenshot2.png "Screenshot")
+![Screenshot](/docs/user_show1.png "Screenshot")
+![Screenshot](/docs/favourites.png "Screenshot")
 
 * Target Audience: 
 (add more info)
@@ -217,10 +219,11 @@ Describe the way tasks are allocated and tracked in your project
 ![Trello](/docs/trello6.png "Trello")
 
 ### Things to talk about in presentation
-- delete_duplicates in favourites controller
+- General overview
 - search partial which displays in all pages, getting @q to work
 - pagination gem
 - incrementing page views
+- delete_duplicates in favourites controller
 - seed file
 - google API, geocoder gem, generating maps based off of suburb.
 - using "Ausburbs" to create a pre-defined list of suburbs and states 
@@ -250,3 +253,5 @@ Doesn't work but this does work:
     The reason seems to be because of the nested call: first we go to the racquet instance, then the status instance, then try to change the sold and save. Rails says it solves in the console, but upon exiting and starting again it hasn't saved. 
 
     However if we go only one call deep, i.e. just the status (shown above with the .where search), and set the sold to true, it works.
+
+    - geocoder timing out needed initializer file for when internet is slow

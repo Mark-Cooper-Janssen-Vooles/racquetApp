@@ -104,7 +104,11 @@ class UserDetailsController < ApplicationController
       id = params[:id]
 
       if current_user.user_detail.id == id.to_i || current_user.user_detail.user_type == "admin"
-        @user_detail = UserDetail.find(id)
+        if current_user.user_detail.user_type == "admin"
+          @user_detail = UserDetail.where("user_type = '1'")
+        else
+          @user_detail = UserDetail.find(id)
+        end
       end
         
       if @user_detail == nil

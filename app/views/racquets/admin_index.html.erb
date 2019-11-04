@@ -1,0 +1,34 @@
+<h1>ADMIN ONLY PAGE</h1>
+<br>
+<h1>Racquet</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Brand</th>
+      <th>Seller email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @racquets.each do |racquet| %>
+      <tr>
+        <td><%= racquet.title %></td>
+        <td><%= racquet.description %></td>
+        <td><%= racquet.brand %></td>
+        <td><%= User.find(racquet.seller_user_id).email %></td>
+        <td><%= link_to 'Show', racquet_path(racquet.id) %></td>
+        <td><%= link_to 'Edit', edit_racquet_path(racquet.id) %></td>
+        <td><%= link_to 'Delete Racquet', racquet_path(racquet.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%#don't need this link!%>
+<%#= link_to 'New User Detail', new_user_detail_path %>
