@@ -5,7 +5,6 @@ class FavouritesController < ApplicationController
   # GET /favourites.json
   def index
     @favourites = Favourite.where("user_id = '#{current_user.id}'").order(created_at: :desc)
-
   end
 
   # GET /favourites/1

@@ -226,3 +226,27 @@ Describe the way tasks are allocated and tracked in your project
 - using "Ausburbs" to create a pre-defined list of suburbs and states 
 - using Javascript to force entry into input fields to be capitalized 
 - Used RSPEC / capybara for TDD for model validations
+- talk about rails bug discovery: 
+
+    @racquet = Racquet.find(racquet_id)
+    @user = User.find(user_id)
+
+    @racquet.status.sold = true
+    @racquet.status.buyer_user_id_id = @user.id
+    @racquet.save
+
+Doesn't work but this does work: 
+
+    @racquet = Racquet.find(params[:racquetId])
+    @user = User.find(params[:userId])
+
+    the_racquet = Status.where("racquet_id = '#{@racquet.id}'")[0]
+
+    the_racquet.sold = true
+    the_racquet.buyer_user_id_id = @user.id
+    the_racquet.save
+
+
+    The reason seems to be because of the nested call: first we go to the racquet instance, then the status instance, then try to change the sold and save. Rails says it solves in the console, but upon exiting and starting again it hasn't saved. 
+
+    However if we go only one call deep, i.e. just the status (shown above with the .where search), and set the sold to true, it works.

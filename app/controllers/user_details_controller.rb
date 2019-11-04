@@ -23,7 +23,7 @@ class UserDetailsController < ApplicationController
   end
 
   def previous_purchases
-      @purchases = Status.where("buyer_user_id_id = '#{current_user.id}'")
+      @purchases = Status.where("buyer_user_id_id = '#{current_user.id}'").order(:date_sold).page(params[:page]).per(5)
   end
 
   def sales
@@ -45,8 +45,6 @@ class UserDetailsController < ApplicationController
   def create
     @user_detail = UserDetail.new(user_detail_params)
     update_coords_based_on_suburb
-    
-
 
 
     respond_to do |format|

@@ -1,5 +1,11 @@
 <h1>Previous Purchases</h1>
 <br>
+
+<div class="search-pagination">
+  <%= paginate @purchases, window: 2 %>
+  <div><%= page_entries_info @purchases %></div>
+</div>
+
 <div class="card-section">
 <% @purchases.each do |status| %>
       <div class="racquet-card">
@@ -18,8 +24,8 @@
         </div>
         <div class="racquet-description">
           <%= status.racquet.description %>
-          <% if status.racquet.status.sold == true %>
-            <span>SOLD</span>
+          <% if status.racquet.status.date_sold != nil %>
+            <p>Purchased on <%= status.racquet.status.date_sold.strftime("%Y-%m-%d") %></p>
           <% end %>
         </div>
       </div>

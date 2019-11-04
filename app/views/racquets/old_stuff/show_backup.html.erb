@@ -112,6 +112,9 @@
 
       stripe.redirectToCheckout({
         sessionId: "<%= @session_id %>"
+      })
+      .then((result) => {
+        console.log(result)
       });
     });
 </script>

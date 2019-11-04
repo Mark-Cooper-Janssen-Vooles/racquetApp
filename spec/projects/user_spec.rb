@@ -12,7 +12,6 @@ RSpec.describe 'Home Page Title', type: :feature do
   end
 end
 
-
 def sign_up_successfully
   visit "/"
   click_link "Login"

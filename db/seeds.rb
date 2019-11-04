@@ -11,22 +11,25 @@ require 'aws-sdk'
 one_to_ten = (1..10).to_a
 price = (50..320).to_a
 state_rand = ["VIC", "NSW", "WA", "TAS", "NT", "ACT", "QLD", "SA"]
-suburb = ["Melbourne", "Perth", "Hobart"]
+suburb = ["Melbourne", "Perth", "Hobart", "Canberra", "Sydney", "Brisbane"]
 
 one_to_ten.each do |user|
-  User.create(email: Faker::Internet.email, password: "password")
+  #create user + user detail
+  the_user = User.create(email: Faker::Internet.email, password: "password")
   user_detail = UserDetail.create(name: Faker::Name.name, description: Faker::Lorem.sentence(word_count: 10),  user_id: user, user_type: 0)
-
+  #add randomised image
   one_to_seven = (1..7).to_a 
   user_image = "user#{one_to_seven.sample}.png"
   user_detail.picture.attach(io: File.open("app/assets/images/users/#{user_image}"), filename: "#{user_image}")
   user_detail.save
 
+  #add location
   1.times do |thing|
     suburb1 = suburb.sample.upcase
     Location.create(state: state_rand.sample, suburb: suburb1, address_line: "123 fake street", postcode: "3000", user_detail_id: user, latitude: Geocoder.search(suburb1).first.coordinates[0].to_d, longitude: Geocoder.search(suburb1).first.coordinates[1].to_d)
   end
 
+  #racquet info used below
   #in sq inch
   head_size_rand = (201..459).to_a
   #in inches
@@ -38,6 +41,7 @@ one_to_ten.each do |user|
   brand_rand = ["wilson", "head", "yonex", "babolat", "dunlop", "gamma", "prince", "prokennex", "technifibre", "volkl"]
   racquet_type_rand = [0, 1]
 
+  #make racquets
   one_to_ten.sample.times do
     #make racquet
     racquet = Racquet.create(title: Faker::Ancient.god + " Racquet", description: Faker::Lorem.sentence(word_count: 10), head_size: head_size_rand.sample, length: length_rand.sample, strung_weight: strung_weight_rand.sample, balance: balance_rand.sample, stiffness: 50, string_pattern: string_pattern_rand.sample, brand: brand_rand.sample, racquet_type: racquet_type_rand.sample, seller_user_id: user, price: price.sample)
@@ -49,11 +53,12 @@ one_to_ten.each do |user|
     Status.create(sold: false, racquet_id: racquet.id, view_count: 0)
   end
 
-  one_to_ten.sample.times do
-    #make favourites
-    Favourite.create(user_id: one_to_ten.sample, racquet_id: one_to_ten.sample)
-  end
+  #make favourites
+  # one_to_ten.sample.times do
+  #   Favourite.create(user_id: the_user.id, racquet_id: )
+  # end
 end
+
 
 suburb2 = suburb.sample.upcase
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_02_080613) do
+ActiveRecord::Schema.define(version: 2019_11_04_050855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,15 +76,6 @@ ActiveRecord::Schema.define(version: 2019_11_02_080613) do
     t.index ["seller_user_id"], name: "index_racquets_on_seller_user_id"
   end
 
-  create_table "shopping_carts", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "racquet_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["racquet_id"], name: "index_shopping_carts_on_racquet_id"
-    t.index ["user_id"], name: "index_shopping_carts_on_user_id"
-  end
-
   create_table "statuses", force: :cascade do |t|
     t.boolean "sold"
     t.date "date_sold"
@@ -124,8 +115,6 @@ ActiveRecord::Schema.define(version: 2019_11_02_080613) do
   add_foreign_key "favourites", "users"
   add_foreign_key "locations", "user_details"
   add_foreign_key "racquets", "users", column: "seller_user_id"
-  add_foreign_key "shopping_carts", "racquets"
-  add_foreign_key "shopping_carts", "users"
   add_foreign_key "statuses", "racquets"
   add_foreign_key "statuses", "users", column: "buyer_user_id_id"
   add_foreign_key "user_details", "users"

@@ -29,11 +29,12 @@
     </div>
     <div class="more-info">
       <div class="head-info">
-        <% if @racquet.status.sold == true %>
-          <span>SOLD</span>
-        <% end %>
         <div class="head-info-line1">
+        <% if @racquet.status.sold == true %>
+          <span class="sold-show-page">Sold on <%= @racquet.status.date_sold.strftime("%Y-%m-%d") %></span>
+        <% else %>
           <span>Posted on: <%= @racquet.status.created_at.strftime("%Y-%m-%d") %></span>
+        <% end %>
           <span>Views: <%= @racquet.status.view_count %></span>
         </div>
         <h3>Price: $<%= @racquet.price %></h3>
@@ -59,7 +60,7 @@
           <% if @racquet.status.sold == false %>
             <button data-stripe="payment">Buy this racquet <%= number_to_currency(@racquet.price) %></button>
           <% else %>
-            <button class="sold-button">Buy this racquet <%= number_to_currency(@racquet.price) %></button>
+            <button class="sold-button" type="button" disabled >Buy this racquet <%= number_to_currency(@racquet.price) %></button>
           <% end %>
         <% end %>
       </div>
