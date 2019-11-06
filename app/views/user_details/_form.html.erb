@@ -27,10 +27,10 @@
     'image/png,image/gif,image/jpeg,image/jpg' %>
   </div>
 
-  <div class="field">
+    <%# moved to controller! %>
     <%# this needs to default to the logged in users id! %>
-    <%= form.hidden_field(:user_id, :value => current_user.id) %>
-  </div>
+    <%#= form.hidden_field(:user_id, :value => current_user.id) %>
+
 
   <%= form.fields_for :location do |loc_form|%>
   

@@ -3,7 +3,7 @@ class UserDetailsController < ApplicationController
 
   before_action :set_user_detail, only: [:show]
 
-  before_action :set_user_detail_specific, only: [:index, :edit, :update, :destroy]
+  before_action :set_user_detail_specific, only: [:edit, :update, :destroy]
 
   # before_action :set_user_detail_specific, only: [:edit, :update, :destroy]
 
@@ -14,6 +14,12 @@ class UserDetailsController < ApplicationController
   # GET /user_details
   # GET /user_details.json
   def index
+    if current_user.user_detail.user_type == "admin"
+      @user_detail = UserDetail.where("user_type = '1'")
+    else
+      redirect_to root_path
+    end
+
     @user_details = UserDetail.all.sort
   end
 
@@ -49,6 +55,7 @@ class UserDetailsController < ApplicationController
 
     respond_to do |format|
       if @user_detail.save
+        @user_detail.user_id = current_user.id
 
         if @user_detail.picture.attached? == false 
           one_to_seven = (1..7).to_a 
@@ -74,7 +81,12 @@ class UserDetailsController < ApplicationController
       if @user_detail.update(user_detail_params)
         update_coords_based_on_suburb
 
-        format.html { redirect_to @user_detail, notice: 'User detail was successfully updated.' }
+        if current_user.user_detail.user_type == "admin"
+          format.html { redirect_to user_details_path, notice: 'User detail was successfully updated.' }
+        else
+          format.html { redirect_to @user_detail, notice: 'User detail was successfully updated.' }
+        end
+
         format.json { render :show, status: :ok, location: @user_detail }
       else
         format.html { render :edit }
@@ -89,7 +101,13 @@ class UserDetailsController < ApplicationController
 
     @user_detail.destroy
     respond_to do |format|
-      format.html { redirect_to new_user_detail_path, notice: 'User detail was successfully destroyed.' }
+
+      if current_user.user_detail.user_type == "admin"
+        format.html { redirect_to user_details_path, notice: 'User detail was successfully destroyed.' }
+      else
+        format.html { redirect_to new_user_detail_path, notice: 'User detail was successfully destroyed.' } 
+      end
+
       format.json { head :no_content }
     end
   end
@@ -104,11 +122,7 @@ class UserDetailsController < ApplicationController
       id = params[:id]
 
       if current_user.user_detail.id == id.to_i || current_user.user_detail.user_type == "admin"
-        if current_user.user_detail.user_type == "admin"
-          @user_detail = UserDetail.where("user_type = '1'")
-        else
           @user_detail = UserDetail.find(id)
-        end
       end
         
       if @user_detail == nil
@@ -117,7 +131,9 @@ class UserDetailsController < ApplicationController
     end
 
     def update_coords_based_on_suburb
-      if @user_detail.location.suburb != ""
+      suburb = @user_detail.location.suburb
+      
+      if @user_detail.location.suburb != "" && Geocoder.search(suburb) != nil
         suburb = @user_detail.location.suburb
         coords = Geocoder.search(suburb).first.coordinates
         @user_detail.location.latitude = coords[0].to_d

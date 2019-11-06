@@ -12,28 +12,29 @@
       <%= link_to("Inbox", conversations_path) %>
 
       <% @conversations = Conversation.where("sender_id = ? OR receiver_id = ?", current_user.id, current_user.id) %>
+      <% total_messages = [] %>
       <% @conversations.each do |conversation| %>
         <% if !conversation.unread_message_count(current_user).zero? %>
-          (<%= conversation.unread_message_count(current_user) %>)
+          <% total_messages.push(conversation.unread_message_count(current_user)) %>
         <% end %>
+      <% end %>
+      <% if total_messages.sum > 0 %>
+        <span>(<%= total_messages.sum %>)</span>
       <% end %>
 
       <%= link_to("Sell", new_racquet_path)%>
       <%= link_to("Favourites", favourites_path) %>
       <%= link_to("My Account", user_detail_path(current_user.user_detail.id)) %>
-      <%= link_to("Shopping Cart", root_path) %>
     <% elsif user_signed_in? %>
       <%= link_to("Inbox", new_user_detail_path) %>
       <%= link_to("Sell", new_user_detail_path)%>
       <span>Favourites</span>
       <%= link_to("My Account", new_user_detail_path) %>
-      <%= link_to("Shopping Cart", root_path)%>
     <% else %>
       <%= link_to("Inbox", new_user_session_path) %>
       <%= link_to("Sell", new_user_session_path) %>
       <%= link_to("Favourites", new_user_session_path) %>
       <%= link_to("My Account", new_user_session_path) %>
-       <%= link_to("Shopping Cart", new_user_session_path)%>
     <% end %>
   </div>
 </nav>

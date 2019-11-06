@@ -3,7 +3,10 @@ class ConversationsController < ApplicationController
 
   def index
     @conversations = Conversation.where("sender_id = ? OR receiver_id = ?", current_user.id, current_user.id)
-    @users = User.where.not(id: current_user.id)
+    # @users = User.where.not(id: current_user.id)
+    @q = User.where.not(id: current_user.id).ransack(params[:q])
+    @users = @q.result(distinct: true)
+                .order(created_at: :desc)
   end
 
   def create

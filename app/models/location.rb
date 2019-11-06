@@ -2,9 +2,6 @@ class Location < ApplicationRecord
   belongs_to :user_detail
   validates :state, :suburb, :address_line, :postcode, presence: true
 
-  # states = Ausburbs.state_names.join(',').tr(',', ' ')
-  
-  # VALID_STATES = %w(Peter Paul Mary)
   VALID_STATES = Ausburbs.state_names
   validates_inclusion_of :state, :in => VALID_STATES
 

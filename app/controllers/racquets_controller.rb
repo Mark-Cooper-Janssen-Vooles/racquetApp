@@ -57,8 +57,10 @@ class RacquetsController < ApplicationController
       @session_id = session.id
     end
 
-
     @seller_user = User.find(@racquet.seller_user_id)
+    # if @seller_user.user_detail == nil 
+    #   @seller_user.user_detail.name = "User was deleted"
+    # end
   end
 
   # GET /racquets/new
@@ -74,6 +76,7 @@ class RacquetsController < ApplicationController
   # POST /racquets.json
   def create
     @racquet = Racquet.new(racquet_params)
+    @racquet.seller_user_id = current_user.id
     respond_to do |format|
       if @racquet.save
         Status.create(sold: false, racquet_id: @racquet.id, view_count: 0)
@@ -96,8 +99,10 @@ class RacquetsController < ApplicationController
   def update
     respond_to do |format|
       if @racquet.update(racquet_params)
-        format.html { redirect_to @racquet, notice: 'Racquet was successfully updated.' }
+        id = @racquet.id
+        format.html { redirect_to racquet_path(id), notice: 'Racquet was successfully updated.' }
         format.json { render :show, status: :ok, location: @racquet }
+        # raise
       else
         format.html { render :edit }
         format.json { render json: @racquet.errors, status: :unprocessable_entity }
@@ -186,4 +191,5 @@ class RacquetsController < ApplicationController
     def racquet_params
       params.require(:racquet).permit(:seller_user_id, :description, :head_size, :length, :strung_weight, :balance, :stiffness, :string_pattern, :brand, :racquet_type, :picture, :title, :price)
     end
+
 end

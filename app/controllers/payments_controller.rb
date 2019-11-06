@@ -4,22 +4,16 @@ class PaymentsController < ApplicationController
   def success
     @racquet = Racquet.find(params[:racquetId])
     @user = User.find(params[:userId])
-
-    the_racquet = Status.where("racquet_id = '#{@racquet.id}'")[0]
-
-    the_racquet.sold = true
-    the_racquet.buyer_user_id_id = @user.id
-    the_racquet.date_sold = Time.now
-    the_racquet.save
     
+    #update racquet status
+    racquet_status_update
 
-    # @racquet = Racquet.find(racquet_id)
-    # @user = User.find(user_id)
+    #create conversation 
+    conversation = Conversation.create(sender_id: @user.id, receiver_id: @racquet.seller_user_id) 
 
-    # @racquet.status.sold = true
-    # @racquet.status.buyer_user_id_id = @user.id
-    # @racquet.save
-    # byebug
+    default_message = "#{current_user.user_detail.name.capitalize} has purchased your racquet: #{@racquet.title}. Please organise a pickup time or postage method."
+
+    Message.create(body: "#{default_message}", conversation_id: conversation.id, user_id: current_user.id)
   end
 
   def webhook
@@ -36,12 +30,6 @@ class PaymentsController < ApplicationController
 
     #status 200 erroring out??? should have above @racquet stuff after status 200 but it never gets there.
     status 200
-
-    the_racquet = Status.where("racquet_id = '#{racquet_id}'")[0]
-
-    the_racquet.sold = true
-    the_racquet.buyer_user_id_id = user_id
-    the_racquet.save
   end
 
   private 
@@ -55,5 +43,18 @@ class PaymentsController < ApplicationController
   #     :subject => "Hello Mark Janssen",
   #     :text => "Congratulations Mark Janssen, you just sent an email with Mailgun!  You are truly awesome!"
   # end
+
+  def racquet_status_update
+    #update racquet status and buyer id
+    racquet_id = @racquet.id
+    user_id = @user.id
+
+    the_racquet = Status.where("racquet_id = '#{racquet_id}'")[0]
+
+    the_racquet.sold = true
+    the_racquet.buyer_user_id_id = user_id
+    the_racquet.date_sold = Time.now
+    the_racquet.save
+  end
 
 end

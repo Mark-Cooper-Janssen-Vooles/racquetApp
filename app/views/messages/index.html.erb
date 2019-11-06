@@ -1,19 +1,35 @@
 <h1>Messages</h1>
-<ul>
-  <% @messages.each do |message| %>
-    <% if message.body %>
-      <li>
-        <h4><%= message.user.email %></h4>
-        <p><%= message.body %></p>
-      </li>
+<br>
+<p>Between <%= User.find(@conversation.sender_id).user_detail.name %> and <%= User.find(@conversation.receiver_id).user_detail.name %></p>
+
+<hr>
+
+<div class="main-messages">
+
+    <% @messages.each do |message| %>
+      <% if message.body %>
+
+      <% name = message.user.user_detail.name.capitalize %>
+        <div class="message-parent">
+          <div class="message-child">
+            <%= image_tag(message.user.user_detail.picture, class: "message-image") if message.user.user_detail.picture.attached? %>
+            <div class="user-message">
+              <h4><%= link_to("#{name}", user_detail_path(message.user.id)) %>:</h4>
+            <p><%= message.body %></p>
+            </div>
+          </div>
+        <div>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
 
-<%= form_for [@conversation, @message] do |f| %>
-  <div class="field">
-    <%= f.text_area :body, placeholder: "Your message" %>
+</div>
+
+  <div class="message-entry">
+    <%= form_for [@conversation, @message] do |f| %>
+      <div class="field">
+        <%= f.text_area :body, placeholder: "Your message" %>
+      </div>
+
+      <%= f.submit "Send" %>
+    <% end %>
   </div>
-
-  <%= f.submit "Send" %>
-<% end %>

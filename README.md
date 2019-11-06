@@ -85,7 +85,6 @@ Internal messaging system between users (if there is time)
 ![Screenshot](/docs/user_show1.png "Screenshot")
 ![Screenshot](/docs/favourites.png "Screenshot")
 
-
 * Target Audience: 
 (add more info)
 Tennis players or classic racquet collectors
@@ -218,6 +217,7 @@ Describe the way tasks are allocated and tracked in your project
 ![Trello](/docs/trello4.png "Trello")
 ![Trello](/docs/trello5.png "Trello")
 ![Trello](/docs/trello6.png "Trello")
+![Trello](/docs/trello7.png "Trello")
 
 ### Things to talk about in presentation
 - General overview

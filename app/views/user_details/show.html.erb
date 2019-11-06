@@ -20,7 +20,7 @@
   <div class="user-info">
     <div class="header">
       <h1><%= @user_detail.name %></h1>
-      <span>Contact user: <%= current_user.email %></span>
+      <span>Contact user: <%= User.find(@user_detail.id).email %></span>
     </div>
 
     <div class="body">
