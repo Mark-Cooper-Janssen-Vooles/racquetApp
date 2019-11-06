@@ -52,7 +52,7 @@ class PaymentsController < ApplicationController
     the_racquet = Status.where("racquet_id = '#{racquet_id}'")[0]
 
     the_racquet.sold = true
-    the_racquet.buyer_user_id_id = user_id
+    the_racquet.user_id = user_id
     the_racquet.date_sold = Time.now
     the_racquet.save
   end

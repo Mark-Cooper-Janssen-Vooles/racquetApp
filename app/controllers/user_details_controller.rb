@@ -29,7 +29,7 @@ class UserDetailsController < ApplicationController
   end
 
   def previous_purchases
-      @purchases = Status.where("buyer_user_id_id = '#{current_user.id}'").order(:date_sold).page(params[:page]).per(5)
+      @purchases = Status.where("user_id = '#{current_user.id}'").order(:date_sold).page(params[:page]).per(5)
   end
 
   def sales
@@ -98,9 +98,13 @@ class UserDetailsController < ApplicationController
   # DELETE /user_details/1
   # DELETE /user_details/1.json
   def destroy
-
     @user_detail.destroy
     respond_to do |format|
+      #delete racquets statuses and then the racquet
+      User.find(@user_detail.user_id).racquets.each do |racquet|
+        racquet.status.destroy
+      end
+      User.find(@user_detail.user_id).racquets.destroy_all
 
       if current_user.user_detail.user_type == "admin"
         format.html { redirect_to user_details_path, notice: 'User detail was successfully destroyed.' }

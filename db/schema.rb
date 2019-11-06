@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_04_232920) do
+ActiveRecord::Schema.define(version: 2019_11_06_060324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,12 +98,12 @@ ActiveRecord::Schema.define(version: 2019_11_04_232920) do
     t.boolean "sold"
     t.date "date_sold"
     t.integer "view_count"
-    t.bigint "buyer_user_id_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "racquet_id"
-    t.index ["buyer_user_id_id"], name: "index_statuses_on_buyer_user_id_id"
+    t.bigint "user_id"
     t.index ["racquet_id"], name: "index_statuses_on_racquet_id"
+    t.index ["user_id"], name: "index_statuses_on_user_id"
   end
 
   create_table "user_details", force: :cascade do |t|
@@ -136,6 +136,6 @@ ActiveRecord::Schema.define(version: 2019_11_04_232920) do
   add_foreign_key "messages", "users"
   add_foreign_key "racquets", "users", column: "seller_user_id"
   add_foreign_key "statuses", "racquets"
-  add_foreign_key "statuses", "users", column: "buyer_user_id_id"
+  add_foreign_key "statuses", "users"
   add_foreign_key "user_details", "users"
 end

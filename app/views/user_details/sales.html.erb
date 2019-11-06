@@ -23,8 +23,8 @@
         <div class="racquet-description">
           <%= status.racquet.description %>
           <% if status.racquet.status.sold == true %>
-            <span>SOLD TO <%= User.find(status.buyer_user_id_id).email %> </span>
-            <span><%= link_to("View buyers profile", user_detail_path(status.buyer_user_id_id))%>
+            <span>SOLD TO <%= User.find(status.user_id).email %> </span>
+            <span><%= link_to("View buyers profile", user_detail_path(status.user_id))%>
           <% end %>
         </div>
       </div>

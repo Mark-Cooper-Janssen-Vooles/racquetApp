@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :messages, :dependent => :destroy
 
   has_one :user_detail, :dependent => :destroy
-  has_one :favourite
+  has_one :favourite, :dependent => :destroy
 
 
   before_destroy :destroy_stuff

@@ -256,3 +256,10 @@ Doesn't work but this does work:
     However if we go only one call deep, i.e. just the status (shown above with the .where search), and set the sold to true, it works.
 
     - geocoder timing out needed initializer file for when internet is slow
+    - geocoder server going down and needing an if statement when it returns nil
+    - deleting user_details also needs to delete user, racquet, racquet status and location ... needed to manually delete status of racquet and racquet in user_details delete method with a loop:
+
+    User.find(@user_detail.user_id).racquets.each do |racquet|
+        racquet.status.destroy
+      end
+      User.find(@user_detail.user_id).racquets.destroy_all

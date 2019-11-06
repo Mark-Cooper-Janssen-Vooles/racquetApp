@@ -3,7 +3,7 @@ class UserDetail < ApplicationRecord
   has_one :location, :dependent => :destroy
   accepts_nested_attributes_for :location
 
-  has_one_attached :picture
+  has_one_attached :picture, dependent: :destroy
 
   validates :name, :description, :user_type, presence: true
   #enum for user_type:
