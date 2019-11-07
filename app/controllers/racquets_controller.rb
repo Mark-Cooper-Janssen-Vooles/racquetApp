@@ -1,5 +1,5 @@
 class RacquetsController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy, :new]
   before_action :set_racquet, only: [:show]
   before_action :set_user_racquet, only: [:edit, :update, :destroy]
   before_action :make_favourite, only: [:volkl, :technifibre, :prokennex, :prince, :gamma, :dunlop, :babolat, :yonex, :head, :wilson, :show]
@@ -7,18 +7,23 @@ class RacquetsController < ApplicationController
   # GET /racquets
   # GET /racquets.json
   def index
+    #ransack search gem
     @q = Racquet.ransack(params[:q])
+    #display search results ordered by newest created, display 5 per page.
     @racquets = @q.result(distinct: true)
                   .order(created_at: :desc)
                   .page(params[:page]).per(5)
+    #allow creation of new favourite
     @favourite = Favourite.new
   end
 
   def admin_index
-    @racquets = Racquet.all
+    #view all racquets, from newest to oldest
+    @racquets = Racquet.all.order(created_at: :desc)
   end
 
   def search
+    #used to persist search bar as a partial across all pages
     index
     render :index
   end
@@ -32,7 +37,7 @@ class RacquetsController < ApplicationController
       @status.increment!(:view_count)
     end
     increment_page_views
-
+    #stripe API 
     if user_signed_in?
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
@@ -58,9 +63,6 @@ class RacquetsController < ApplicationController
     end
 
     @seller_user = User.find(@racquet.seller_user_id)
-    # if @seller_user.user_detail == nil 
-    #   @seller_user.user_detail.name = "User was deleted"
-    # end
   end
 
   # GET /racquets/new
@@ -76,6 +78,7 @@ class RacquetsController < ApplicationController
   # POST /racquets.json
   def create
     @racquet = Racquet.new(racquet_params)
+    #set seller_user_id
     @racquet.seller_user_id = current_user.id
     respond_to do |format|
       if @racquet.save
@@ -102,7 +105,6 @@ class RacquetsController < ApplicationController
         id = @racquet.id
         format.html { redirect_to racquet_path(id), notice: 'Racquet was successfully updated.' }
         format.json { render :show, status: :ok, location: @racquet }
-        # raise
       else
         format.html { render :edit }
         format.json { render json: @racquet.errors, status: :unprocessable_entity }
@@ -177,8 +179,10 @@ class RacquetsController < ApplicationController
       id = params[:id]
 
       if current_user.racquets.count > 0 && current_user.racquets.find_by_id(id)
+        #sets current users racquets for editing / updating / deleting
         @racquet = current_user.racquets.find_by_id(id)
       elsif current_user.user_detail.user_type == "admin"
+        #sets admin ability to edit / update / delete racquets
         @racquet = Racquet.find(id)
       end
 
