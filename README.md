@@ -285,6 +285,8 @@ When a user creates a Racquet for sale, a Status is automatically generated and 
 
 If a User wants to make a Racquet a Favourite, it creates a new row in Favourite with the Racquet Id and the User Id. If a User wants to talk to another User, a Conversation is created and a Messages table is created for that Conversation, which creates row entries for each Message sent. 
 
+When a Racquet is deleted, the associated Status is also deleted.
+
 When a UserDetail is deleted, either by themselves or the admin dashboard, this simultaneously deletes the Location (through dependent: :destroy),the Statuses, the Racquets and the Favourite and the User tables that were associated with this User as shown below: 
 
 ````ruby
