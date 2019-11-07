@@ -106,7 +106,9 @@ class UserDetailsController < ApplicationController
       end
       User.find(@user_detail.user_id).racquets.destroy_all
       #delete favourites
-      User.find(@user_detail.user_id).favourite.destroy
+      if User.find(@user_detail.user_id).favourite != nil
+        User.find(@user_detail.user_id).favourite.destroy
+      end
       #delete user 
       User.find(@user_detail.user_id).destroy
 

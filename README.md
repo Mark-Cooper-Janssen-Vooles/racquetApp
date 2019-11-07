@@ -1,12 +1,5 @@
-Rails project order of operations:
-- Entity relationship diagram (lucid chart) (DONE)
-- Wire frames - (going to be an eBay clone) - do three and then move on to site map. (figma)(DONE)
-- Site map (lucid chart) - (DONE)
-- Start making the app! Use trello to go through MVP and Beast (trello) - (CURRENT)
-https://trello.com/b/3auvMoX3/railsapp
-- When only 3 days left, start styling CSS. User typewriter + styling from portfolio.
-
-- finish off readme
+- Redo site map to reflect current design
+- Redo ERD thing to reflect current design
 - do slide deck at the very end!
 
 # README
@@ -98,6 +91,9 @@ Tech stack (e.g. html, css, deployment platform, etc)
 - Ruby
 - Ruby on Rails
 - Postgresql
+
+<p>API's used: </p>
+
 - AWS API
 - Stripe API
 - Google maps API
@@ -217,7 +213,43 @@ Describe your projects models in terms of the relationships (active record assoc
 
 ---
 
+User:
+* has many statuses
+* has many racquets
+* has many messages
+* has one user detail
+* has one favourite 
 
+UserDetail:
+* belongs to user
+* has one location
+* accepts nested attributes for location
+
+Location: 
+* belongs to user detail
+
+Racquet: 
+* belongs to user (as seller_user)
+* has one status
+* has one favourite 
+* accepts nested attributes for favourite
+
+Status:
+* belongs to user (optional - assigned at purchase)
+* belongs to racquet
+
+Favourite: 
+* belongs to user 
+* belongs to racquet
+
+Conversation: 
+* belongs to user (as sender)
+* belongs to user (as reciever) 
+* has many messages
+
+Message:
+* belongs to conversation
+* belongs to user
 
 ---
 
@@ -227,7 +259,11 @@ Discuss the database relations to be implemented in your application
 
 ---
 
-(discuss here)
+When a User is created, they must enter a UserDetail to be able to access the rest of the user login features of the website. When a UserDetail is created, the form associated with it has nested attributes for location so it is created at the same time from the same form submit button. 
+
+When a user creates a Racquet for sale, a Status is automatically generated and attached to that Racquet. The Status has a user_id reference to the User table, but is made optional since this is only assigned when / if the Racquet is purchased by a User. 
+
+If a User wants to make a Racquet a Favourite, it creates a new row in Favourite with the Racquet Id and the User Id. If a User wants to talk to another User, a Conversation is created and a Messages table is created for that Conversation, which creates row entries for each Message sent. 
 
 ---
 
@@ -235,10 +271,151 @@ Discuss the database relations to be implemented in your application
 
 Provide your database schema design
 
----
+--- 
 
-(provide here)
-talk about data types and reasoning behind datatypes, i.e. number as a string... didnt need to do maths on it or something. Or using a text over a string (may have more than 255 characters)
+Bigint was used as the data type for references in most instances. In the Conversation table integer was used to check if both would work. The advantage of using a bigint is that its 64 bit and thus won't ever reach a point where it will run out, but a 32 bit (i.e. an integer data type) will eventually run out at 2.1 billion entries. An integer, however, uses up less space. 
+
+I used a string for for "postcode" in the locations table as even though this is a number, no maths is done on this entry and there is potential for a leading zero (i.e. if someone lives in the NT in 0800).
+
+For smaller text entries the fields used are strings as this is more space efficient for the database (which maps to postgres's VARCHAR data type), but for areas that have potential to be over 255 characters (i.e. descriptions), I have used "text". 
+
+Decimal was used for latitude and longitute as this is a formatting requirement to use the Google Maps API. 
+
+A boolean was used for the Messages read column, as well as the Status sold column as these just require true or false. Also in the Status, the racquet type column uses an integer of 0 or 1 which uses an enum to map to "modern" or "classic". 
+
+````Ruby
+
+ActiveRecord::Schema.define(version: 2019_11_06_060324) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "receiver_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "favourites", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "racquet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["racquet_id"], name: "index_favourites_on_racquet_id"
+    t.index ["user_id"], name: "index_favourites_on_user_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "state"
+    t.string "suburb"
+    t.string "address_line"
+    t.string "postcode"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_detail_id"
+    t.decimal "latitude"
+    t.decimal "longitude"
+    t.index ["user_detail_id"], name: "index_locations_on_user_detail_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "body"
+    t.bigint "conversation_id"
+    t.bigint "user_id"
+    t.boolean "read", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "racquets", force: :cascade do |t|
+    t.text "description"
+    t.string "head_size"
+    t.string "length"
+    t.string "strung_weight"
+    t.string "balance"
+    t.string "stiffness"
+    t.string "string_pattern"
+    t.string "brand"
+    t.integer "racquet_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "seller_user_id"
+    t.string "title"
+    t.float "price"
+    t.index ["seller_user_id"], name: "index_racquets_on_seller_user_id"
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.boolean "sold"
+    t.date "date_sold"
+    t.integer "view_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "racquet_id"
+    t.bigint "user_id"
+    t.index ["racquet_id"], name: "index_statuses_on_racquet_id"
+    t.index ["user_id"], name: "index_statuses_on_user_id"
+  end
+
+  create_table "user_details", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.bigint "user_id"
+    t.integer "user_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_details_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "favourites", "racquets"
+  add_foreign_key "favourites", "users"
+  add_foreign_key "locations", "user_details"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
+  add_foreign_key "racquets", "users", column: "seller_user_id"
+  add_foreign_key "statuses", "racquets"
+  add_foreign_key "statuses", "users"
+  add_foreign_key "user_details", "users"
+end
+
+````
 
 ---
 
@@ -262,6 +439,13 @@ Describe the way tasks are allocated and tracked in your project
 ![Trello](/docs/trello6.png "Trello")
 ![Trello](/docs/trello7.png "Trello")
 ![Trello](/docs/trello8.png "Trello")
+
+
+
+
+
+
+
 
 ### Things to talk about in presentation
 - General overview

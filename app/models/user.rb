@@ -11,13 +11,4 @@ class User < ApplicationRecord
 
   has_one :user_detail, :dependent => :destroy
   has_one :favourite, :dependent => :destroy
-
-  # before_destroy :destroy_stuff
-
-  # private
-
-  # def destroy_stuff
-  #   self.racquets.destroy_all
-  #   self.messages.destroy_all
-  # end
 end
