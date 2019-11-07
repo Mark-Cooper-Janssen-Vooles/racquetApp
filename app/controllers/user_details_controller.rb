@@ -1,26 +1,19 @@
 class UserDetailsController < ApplicationController
   before_action :authenticate_user!, only: [:show, :edit, :update, :destroy, :new]
-
   before_action :set_user_detail, only: [:show]
-
   before_action :set_user_detail_specific, only: [:edit, :update, :destroy]
-
-  # before_action :set_user_detail_specific, only: [:edit, :update, :destroy]
-
-  # before_action :set_admin, only: [:index]
-
-
 
   # GET /user_details
   # GET /user_details.json
   def index
-    if current_user.user_detail.user_type == "admin"
+    #checks to see if admin is current user, if not redirects them
+    if current_user != nil && current_user.user_detail != nil && current_user.user_detail.user_type == "admin"
       @user_detail = UserDetail.where("user_type = '1'")
     else
       redirect_to root_path
     end
-
-    @user_details = UserDetail.all.sort
+    #view all users, from newest to oldest
+    @user_details = UserDetail.all.order(created_at: :desc)
   end
 
   # GET /user_details/1
@@ -29,10 +22,12 @@ class UserDetailsController < ApplicationController
   end
 
   def previous_purchases
-      @purchases = Status.where("user_id = '#{current_user.id}'").order(:date_sold).page(params[:page]).per(5)
+    #displays users previous purchases
+    @purchases = Status.where("user_id = '#{current_user.id}'").order(:date_sold).page(params[:page]).per(5)
   end
 
   def sales
+    #displays users previous purchases
     @sales = Racquet.where("seller_user_id = '#{current_user.id}'") && Status.where("sold = 'true'")
   end
 
@@ -50,14 +45,14 @@ class UserDetailsController < ApplicationController
   # POST /user_details.json
   def create
     @user_detail = UserDetail.new(user_detail_params)
+    #sets coordinates for the entered suburb for google maps API functionality
     update_coords_based_on_suburb
-
+    #sets user_id to current_users id
     @user_detail.user_id = current_user.id
 
     respond_to do |format|
       if @user_detail.save
         
-
         if @user_detail.picture.attached? == false 
           one_to_seven = (1..7).to_a 
           user_image = "user#{one_to_seven.sample}.png"
@@ -142,6 +137,7 @@ class UserDetailsController < ApplicationController
     end
 
     def update_coords_based_on_suburb
+      #uses geocoder to search for suburb
       suburb = @user_detail.location.suburb
       
       if @user_detail.location.suburb != "" && Geocoder.search(suburb) != nil

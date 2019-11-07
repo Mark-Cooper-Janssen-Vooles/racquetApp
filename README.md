@@ -540,8 +540,29 @@ Doesn't work but this does work:
     - deleting user_details also needs to delete user, racquet, racquet status and location ... needed to manually delete status of racquet and racquet in user_details delete method with a loop:
 
 ````ruby
-    User.find(@user_detail.user_id).racquets.each do |racquet|
+ def destroy
+    @user_detail.destroy
+    respond_to do |format|
+      #delete racquets statuses and then the racquet
+      User.find(@user_detail.user_id).racquets.each do |racquet|
         racquet.status.destroy
       end
       User.find(@user_detail.user_id).racquets.destroy_all
+      #delete favourites
+      if User.find(@user_detail.user_id).favourite != nil
+        User.find(@user_detail.user_id).favourite.destroy
+      end
+      #delete user 
+      User.find(@user_detail.user_id).destroy
+
+      if current_user.user_detail.user_type == "admin"
+        format.html { redirect_to user_details_path, notice: 'User detail was successfully destroyed.' }
+      else
+        format.html { redirect_to new_user_detail_path, notice: 'User detail was successfully destroyed.' } 
+      end
+
+      format.json { head :no_content }
+    end
+  end
 ````
+
