@@ -52,7 +52,7 @@
             <%= link_to("View Sales", sales_path)%> |
             <%= link_to("View Purchases", purchases_path)%> |
             <%= link_to 'Edit Profile', edit_user_detail_path(@user_detail) %> | 
-            <%= link_to 'Delete Profile', @user_detail, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Delete Profile', @user_detail, method: :delete, data: { confirm: 'Are you sure? This will destroy all your favourites and racquets.' } %>
           <% end %>
         </div>
       </div>

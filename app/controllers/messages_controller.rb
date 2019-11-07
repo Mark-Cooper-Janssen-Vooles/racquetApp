@@ -2,14 +2,15 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!
 
   before_action do
+    #find the conversation
     @conversation = Conversation.find(params[:conversation_id])
   end
 
   def index
     @messages = @conversation.messages
-
+    #return the messages between the users
     @messages.where("user_id != ? AND read = ?", current_user.id, false).update_all(read: true)
-
+    #allow creation of a new message
     @message = @conversation.messages.new
   end
 

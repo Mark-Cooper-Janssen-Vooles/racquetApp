@@ -1,5 +1,5 @@
 class UserDetailsController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:show, :edit, :update, :destroy, :new]
 
   before_action :set_user_detail, only: [:show]
 
@@ -52,10 +52,11 @@ class UserDetailsController < ApplicationController
     @user_detail = UserDetail.new(user_detail_params)
     update_coords_based_on_suburb
 
+    @user_detail.user_id = current_user.id
 
     respond_to do |format|
       if @user_detail.save
-        @user_detail.user_id = current_user.id
+        
 
         if @user_detail.picture.attached? == false 
           one_to_seven = (1..7).to_a 
