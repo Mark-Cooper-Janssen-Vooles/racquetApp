@@ -44,6 +44,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    ajaxful_rating (2.2.9.1)
     arel (9.0.0)
     ausburbs (0.2.1)
     autoprefixer-rails (9.7.0)
@@ -1046,6 +1047,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ajaxful_rating (~> 2.2)
   ausburbs (~> 0.2.1)
   aws-sdk (~> 3.0)
   aws-sdk-s3 (~> 1.51)

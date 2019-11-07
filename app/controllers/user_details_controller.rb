@@ -105,6 +105,10 @@ class UserDetailsController < ApplicationController
         racquet.status.destroy
       end
       User.find(@user_detail.user_id).racquets.destroy_all
+      #delete favourites
+      User.find(@user_detail.user_id).favourite.destroy
+      #delete user 
+      User.find(@user_detail.user_id).destroy
 
       if current_user.user_detail.user_type == "admin"
         format.html { redirect_to user_details_path, notice: 'User detail was successfully destroyed.' }
