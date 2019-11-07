@@ -13,12 +13,10 @@
 
   <% end %>
 
-
-
 <br>
 <br>
 
-<h2>Users</h2>
+<h4>Start a new conversation with a user below:</h4>
 
   <% @users.each do |user| %>
     </p><%= link_to user.email, conversations_path(sender_id: current_user.id, receiver_id: user.id), method: :post %></p>

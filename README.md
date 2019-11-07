@@ -1,5 +1,6 @@
 - Redo site map to reflect current design
 - Redo ERD thing to reflect current design
+- Do more figma drawings?!
 - do slide deck at the very end!
 
 # README
@@ -11,7 +12,7 @@ Identification of the problem you are trying to solve by building this particula
 
 A good tennis racquet is often over $300 to buy new, and often times older models are considered better than the newer racquets but they are no longer sold in retail stores. 
 
-Since wooden racquets became a relic, the newer "modern" players racquet can last 20+ years and generally retain their playability quality. RacquetApp creates a dedicated online environment for the public to buy and sell their tennis racquets.
+Since wooden racquets became a relic, the newer "modern" players racquet can last 20+ years and generally retain their play-ability quality. RacquetApp creates a dedicated online environment for the public to buy and sell their tennis racquets.
 
 It caters for a beginner-intermediate player looking to get into the sport by purchasing a quality tennis racquet that isn't super expensive, or an advanced player looking to try out new racquets to up their game.  It also caters for collectors looking to add another classic to their collection.
 
@@ -22,7 +23,7 @@ Why is it a problem that needs solving?
 
 ---
 
-The nature of reality is such that man is destined to suffer. As the buddhist philosophy states, the nature of seeking creates discontentment as happiness only occurs in a content, striveless state. Psychologists have labelled "flow" as the ideal state for the human psyche, with the sport of tennis being an exceptional way to enter this state. There is a distinct demand in tennis for second hand racquets but there is no centralised place where this occurs. Currently buyers and sellers have to search the market, checking on websites like ebay and gumtree. A perfect tennis racquet enables this state to be more easily entered, thus this app will aim to elevate society as a whole through the individual. 
+The nature of reality is such that man is destined to suffer. As the Buddhist philosophy states, the nature of seeking creates discontentment as happiness only occurs in a content, desire-less state. Psychologists have labelled "flow" as the ideal state for the human psyche, with the sport of tennis being an exceptional way to enter this state. There is a distinct demand in tennis for second hand racquets but there is no centralised place where this occurs. Currently buyers and sellers have to search the market, checking on websites like eBay and gumtree. A perfect tennis racquet enables this state to be more easily entered, thus this app will aim to elevate society as a whole through the individual. 
 
 ---
 
@@ -39,6 +40,7 @@ https://racquetapp.herokuapp.com/
 A link to your GitHub repository (repo).
 
 ---
+
 https://github.com/Mark-Cooper-Janssen-Vooles/racquetApp
 
 ---
@@ -67,7 +69,7 @@ Tech stack (e.g. html, css, deployment platform, etc)
 * Stripe payments API
 * Searching / sorting / filtering capacity
 * Google maps API
-* Admin dashboard
+* Admin dashboard - edit/delete all users and racquets
 * Internal messaging system between users
 
 **Sitemap:**
@@ -112,7 +114,6 @@ Tech stack (e.g. html, css, deployment platform, etc)
 - Faker
 - kaminari
 - bootstrap
-- jquery-rails
 - Stripe
 - Geocoder
 - Ausburbs
@@ -125,18 +126,17 @@ User stories for your app
 
 ---
 
-Upon landing on the site, an unregistered user can view racquets that have been listed for sale. They will be able to enter various search paramaters to filter what is displayed below. The home page displays racquet "cards" styled to show the photo of the racquet, the price and title. There is 5 listings per page and a pagniation feature to display more. The listings are displayed in order of last created. There is a large search bar at the top of the screen, which filters the racquets by description, length, balance, stiffness, string pattern, head size, brand or title.
+Upon landing on the site, an unregistered user can view racquets that have been listed for sale. They will be able to enter various search parameters to filter what is displayed below. The home page displays racquet "cards" styled to show the photo of the racquet, the price and title. There is 5 listings per page and a pagination feature to display more. The listings are displayed in order of last created. There is a large search bar at the top of the screen, which filters the racquets by description, length, balance, stiffness, string pattern, head size, brand or title.
 
 From here the user can click on a listings photo to view the individual racquets show page to see more detailed information, such as the specifications, the description of the racquet, and more information about the location of the racquet which includes google map API information. When a racquets show page is viewed, the visits count is incremented by one. 
 
 If the user clicks on "buy racquet", they will be taken to the login or signup page. From here the user will enter certain information about themselves and create an account. The first step is to enter an email and password, which is handled by the Devise gem. After this step they are redirected to the "user details" page and required to enter more information about their name, location, a photo and a description. If they choose not to upload a photo, a default picture is chosen. If for some reason the page closes or they enter a different URL, if the user details for the user remains nil then they will be redirected back to the user details page whenever they try to do an action that requires having user details. 
 
-With an account now set up and logged in, the user can either list a racquet to sell or buy a racquet. If the user finds a racuet they wish to purchase, they can go to that racquets show page and click "buy this racquet" and will be taken to the Stripe website to enter their credit card information. Upon successful completion of this, an automatically generated conversation is started between the buyer and the seller in order to set up a pickup time. 
+With an account now set up and logged in, the user can either list a racquet to sell or buy a racquet. If the user finds a racquet they wish to purchase, they can go to that racquets show page and click "buy this racquet" and will be taken to the Stripe website to enter their credit card information. Upon successful completion of this, an automatically generated conversation is started between the buyer and the seller in order to set up a pickup time. 
 
-The user can click "My Account" to see their information, to view sales, view purchases, edit their profile, delete their profile and view their racquet listings. At this point clicking "view purchases" will take you to a page which lists all the purchaes they have made. Conversely on the sellers account, if they click "view sales" it will list all the sales they have made and the total amount of money made through those sales. 
+The user can click "My Account" to see their information, to view sales, view purchases, edit their profile, delete their profile and view their racquet listings. At this point clicking "view purchases" will take you to a page which lists all the purchases they have made. Conversely on the sellers account, if they click "view sales" it will list all the sales they have made and the total amount of money made through those sales. 
 
-If the user sees a racquet they were interested in but are not willing to commit to buying at the current time, they can favourite the racquet which stores it on their favourites page. 
-
+If the user sees a racquet they were interested in but are not willing to commit to buying at the current time, they can favorite the racquet which stores it on their favorites page. 
 ---
 
 ### R13
@@ -147,7 +147,7 @@ Wireframes for your app
 
 https://www.figma.com/file/C3OSXh87tzmNvvCDX6Isgo/RacquetApp?node-id=10%3A0
 
-Home: 
+Home Desktop: 
 ![Home](/docs/home.png "Home")
 
 Product show page: 
@@ -155,6 +155,24 @@ Product show page:
 
 User show page:
 ![User show page](/docs/user_show.png "User show page")
+
+Favourites page:
+![Favourites page](/docs/favourites_wireframe.png "Favourites page")
+
+---
+
+Home Mobile: 
+![Home](/docs/home_responsive.png "Home")
+
+Product show Mobile: 
+![Product show page](/docs/product_show_responsive.png "Product show page")
+
+User show page:
+![User show page](/docs/user_show_responsive.png "User show page")
+
+User show page:
+![User show page](/docs/favourites_responsive.png "User show page")
+
 
 ---
 
@@ -167,6 +185,8 @@ An ERD for your app
 https://www.lucidchart.com/documents/edit/d5391265-7e1d-44ac-bf07-e0b5534ee76b/0_0?beaconFlowId=744B23A6A8A8B79E
 
 ![ERD](/docs/RacquetApp.png "ERD")
+
+<p>Note: This ERD was created at the start of the project and has since changed somewhat through development. The shopping cart idea was dropped, but conversations and messages tables were added. </p>
 
 ---
 
@@ -244,7 +264,7 @@ Favourite:
 
 Conversation: 
 * belongs to user (as sender)
-* belongs to user (as reciever) 
+* belongs to user (as receiver) 
 * has many messages
 
 Message:
@@ -265,6 +285,35 @@ When a user creates a Racquet for sale, a Status is automatically generated and 
 
 If a User wants to make a Racquet a Favourite, it creates a new row in Favourite with the Racquet Id and the User Id. If a User wants to talk to another User, a Conversation is created and a Messages table is created for that Conversation, which creates row entries for each Message sent. 
 
+When a UserDetail is deleted, either by themselves or the admin dashboard, this simultaneously deletes the Location (through dependent: :destroy),the Statuses, the Racquets and the Favourite and the User tables that were associated with this User as shown below: 
+
+````ruby
+def destroy
+    @user_detail.destroy
+    respond_to do |format|
+      #delete racquets statuses and then the racquet
+      User.find(@user_detail.user_id).racquets.each do |racquet|
+        racquet.status.destroy
+      end
+      User.find(@user_detail.user_id).racquets.destroy_all
+      #delete favourites
+      if User.find(@user_detail.user_id).favourite != nil
+        User.find(@user_detail.user_id).favourite.destroy
+      end
+      #delete user 
+      User.find(@user_detail.user_id).destroy
+
+      if current_user.user_detail.user_type == "admin"
+        format.html { redirect_to user_details_path, notice: 'User detail was successfully destroyed.' }
+      else
+        format.html { redirect_to new_user_detail_path, notice: 'User detail was successfully destroyed.' } 
+      end
+
+      format.json { head :no_content }
+    end
+  end
+````
+
 ---
 
 ### R19
@@ -275,11 +324,11 @@ Provide your database schema design
 
 Bigint was used as the data type for references in most instances. In the Conversation table integer was used to check if both would work. The advantage of using a bigint is that its 64 bit and thus won't ever reach a point where it will run out, but a 32 bit (i.e. an integer data type) will eventually run out at 2.1 billion entries. An integer, however, uses up less space. 
 
-I used a string for for "postcode" in the locations table as even though this is a number, no maths is done on this entry and there is potential for a leading zero (i.e. if someone lives in the NT in 0800).
+I used a string for for "postcode" in the locations table as even though this is a number, no math is done on this entry and there is potential for a leading zero (i.e. if someone lives in the NT in 0800).
 
-For smaller text entries the fields used are strings as this is more space efficient for the database (which maps to postgres's VARCHAR data type), but for areas that have potential to be over 255 characters (i.e. descriptions), I have used "text". 
+For smaller text entries the fields used are strings as this is more space efficient for the database (which maps to PostgreSQL's VAR-CHAR data type), but for areas that have potential to be over 255 characters (i.e. descriptions), I have used "text". 
 
-Decimal was used for latitude and longitute as this is a formatting requirement to use the Google Maps API. 
+Decimal was used for latitude and longitude as this is a formatting requirement to use the Google Maps API. 
 
 A boolean was used for the Messages read column, as well as the Status sold column as these just require true or false. Also in the Status, the racquet type column uses an integer of 0 or 1 which uses an enum to map to "modern" or "classic". 
 
@@ -425,9 +474,7 @@ Describe the way tasks are allocated and tracked in your project
 
 ---
 
-(describe here)
-
----
+This project had tasks divided up into "todo", "MVP" "BEAST", "DONE" and "issues to get help on" categories. At the start of the day we would have in-class meetings talking about our objectives for the day, and I would then add tasks from the MVP and BEAST categories to my "todo" list which reflected the most pressing issues which were my focus for the day. If completed, they would get moved to DONE. If I had an unsolvable issue, they would move to the "issues to get help on" category and stay there until I had access to a teacher or another student who had conquered a similar issue. 
 
 ### Trello boards
 
@@ -439,6 +486,7 @@ Describe the way tasks are allocated and tracked in your project
 ![Trello](/docs/trello6.png "Trello")
 ![Trello](/docs/trello7.png "Trello")
 ![Trello](/docs/trello8.png "Trello")
+![Trello](/docs/trello9.png "Trello")
 
 
 

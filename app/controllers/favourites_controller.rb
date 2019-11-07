@@ -7,19 +7,19 @@ class FavouritesController < ApplicationController
     @favourites = Favourite.where("user_id = '#{current_user.id}'").order(created_at: :desc)
   end
 
-  # GET /favourites/1
-  # GET /favourites/1.json
-  def show
-  end
+  # # GET /favourites/1
+  # # GET /favourites/1.json
+  # def show
+  # end
 
   # GET /favourites/new
   def new
     @favourite = Favourite.new
   end
 
-  # GET /favourites/1/edit
-  def edit
-  end
+  # # GET /favourites/1/edit
+  # def edit
+  # end
 
   # POST /favourites
   # POST /favourites.json
@@ -38,19 +38,19 @@ class FavouritesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /favourites/1
-  # PATCH/PUT /favourites/1.json
-  def update
-    respond_to do |format|
-      if @favourite.update(favourite_params)
-        format.html { redirect_to @favourite, notice: 'Favourite was successfully updated.' }
-        format.json { render :show, status: :ok, location: @favourite }
-      else
-        format.html { render :edit }
-        format.json { render json: @favourite.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # # PATCH/PUT /favourites/1
+  # # PATCH/PUT /favourites/1.json
+  # def update
+  #   respond_to do |format|
+  #     if @favourite.update(favourite_params)
+  #       format.html { redirect_to @favourite, notice: 'Favourite was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @favourite }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @favourite.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /favourites/1
   # DELETE /favourites/1.json
