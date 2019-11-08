@@ -34,18 +34,17 @@
 
   <%= form.fields_for :location do |loc_form|%>
   
+    <%= loc_form.label :state %>
+    <%= loc_form.text_field :state %>
+
     <%= loc_form.label :postcode %>
     <%= loc_form.text_field :postcode %>
 
     <%= loc_form.label :suburb %>
     <%= loc_form.text_field :suburb %>
 
-
-    <%= loc_form.label :address_line %>
+    <%= loc_form.label :optional_address_line_ %>
     <%= loc_form.text_field :address_line %>
-
-    <%= loc_form.label :state %>
-    <%= loc_form.text_field :state %>
 
   <% end %>
 

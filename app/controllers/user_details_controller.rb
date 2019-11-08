@@ -142,10 +142,14 @@ class UserDetailsController < ApplicationController
       
       if @user_detail.location.suburb != "" && Geocoder.search(suburb) != nil
         suburb = @user_detail.location.suburb
-        coords = Geocoder.search(suburb).first.coordinates
-        @user_detail.location.latitude = coords[0].to_d
-        @user_detail.location.longitude = coords[1].to_d
-    
+        #check that country is Australia
+        Geocoder.search(suburb).each_with_index do |reply, index|
+          if reply.country == "Australia"
+            @user_detail.location.latitude = reply.coordinates[0].to_d
+            @user_detail.location.longitude = reply.coordinates[1].to_d
+          end
+        end
+
         @user_detail.save
       end
     end

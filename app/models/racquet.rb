@@ -16,10 +16,9 @@ class Racquet < ApplicationRecord
   validates :balance, numericality: { greater_than: -10, less_than: 15 }, allow_blank: true 
   validates :stiffness, numericality: { greater_than: 40, less_than: 95 }, allow_blank: true
 
-  validates :title, :description, :picture, presence: true
-
   validates :description, length: { minimum: 20,
   too_short: ": Please add a longer description!", maximum: 150, too_long: ": Please shorten your description to under 150 characters." }
 
+  validates :title, :description, :picture, presence: true
 
 end
