@@ -11,91 +11,87 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
+<div class="racquet-form">
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
+  <div class="racquet-left">
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title %>
+    </div>
 
-  <%# add photos %>
-  <div class="field">
-  <%= form.label :picture %> <%= form.file_field :picture, accept:
-  'image/png,image/gif,image/jpeg,image/jpg' %>
-  </div>
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description %>
+    </div>
 
-
-  <div class="field">
-    <%= form.label :head_size %>
-    <%= form.text_field :head_size %>
-  </div>
-
-  <div class="field">
-    <%= form.label :length_in_inches %>
-    <%= form.text_field :length %>
-  </div>
-
-  <div class="field">
-    <%= form.label :strung_weight_in_grams %>
-    <%= form.text_field :strung_weight %>
-  </div>
-
-  <div class="field">
-    <%= form.label :balance %>
-    <%= form.text_field :balance %>
-  </div>
-
-  <div class="field">
-    <%= form.label :stiffness %>
-    <%= form.text_field :stiffness %>
-  </div>
-
-  <div class="field">
-    <%= form.label :string_pattern %>
-    <%= form.text_field :string_pattern %>
-  </div>
-
-  <div class="field">
-    <%#= form.label :brand %>
-    <%#= form.number_field :brand %>
-
+    <div class="field">
       <%= form.label :brand %>
-      <%#= form.select :brand, options_for_select(Racquet.brands.keys.collect { |u| [u] }) %>
       <%= form.select :brand, [' ', 'wilson','head','yonex','babolat', 'dunlop', 'gamma', 'prince', 'prokennex', 'technifibre', 'volkl'], :selected => racquet.brand %>
+    </div>
 
-
-     <%#= form.label :brand %>
-        <%# Racquet.brands.keys.each do |brand| %> 
-          <%#= form.label brand %>
-          <%#= form.radio_button :brand, brand %>
-
-          <%# if brand == racquet.brand %>
-              <%# form.radio_button :brand, :checked => true %>
-          <%# end %>
-      <%# end %>
+    <div class="field">
+      <%= form.label :price %>
+      <%= form.text_field :price %>
+    </div>
   </div>
 
-  <div class="field">
-        <%= form.label :racquet_type %>
-        <% Racquet.racquet_types.keys.each do |type| %> 
-          <%= form.label type %>
-          <%= form.radio_button :racquet_type, type %>
+  <div class="racquet-right">
+    <div class="field">
+      <%= form.label :picture %> <%= form.file_field :picture, accept:
+    'image/png,image/gif,image/jpeg,image/jpg' %>
+    </div>
 
-          <% if type == racquet.racquet_type %>
-              <% form.radio_button :racquet_type, :checked => true %>
+    <div class="field">
+      <%= form.label :head_size %>
+      <%= form.text_field :head_size %>
+    </div>
+
+    <div class="field">
+      <%= form.label :length_in_inches %>
+      <%= form.text_field :length %>
+    </div>
+
+    <div class="field">
+      <%= form.label :strung_weight_in_grams %>
+      <%= form.text_field :strung_weight %>
+    </div>
+
+    <div class="field">
+      <%= form.label :balance %>
+      <%= form.text_field :balance %>
+    </div>
+
+    <div class="field">
+      <%= form.label :stiffness %>
+      <%= form.text_field :stiffness %>
+    </div>
+  </div>
+  <div class="racquet-rightest">
+    <div>
+      <div class="field">
+        <%= form.label :string_pattern %>
+        <%= form.text_field :string_pattern %>
+      </div>
+
+
+      <div class="field">
+          <%= form.label :racquet_type %>
+          <% Racquet.racquet_types.keys.each do |type| %> 
+            <%= form.label type %>
+            <%= form.radio_button :racquet_type, type %>
+
+            <% if type == racquet.racquet_type %>
+                <% form.radio_button :racquet_type, :checked => true %>
+            <% end %>
           <% end %>
-      <% end %>
-  </div>
-
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price %>
-  </div>
-
-  <div class="actions">
+      </div>
+    </div>
+      <div class="actions">
     <%= form.submit %>
+      </div>
   </div>
+</div>
+
+
+
 <% end %>

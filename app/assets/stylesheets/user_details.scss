@@ -16,6 +16,7 @@
 
   display: flex;
   .user-picture {
+    overflow: hidden;
     width: 33%;
     margin-right: 10px;
     display: flex;

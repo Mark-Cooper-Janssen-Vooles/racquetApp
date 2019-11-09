@@ -48,7 +48,8 @@ textarea:focus {
 
 .notices {
   // font-family: Courier, monospace;
-	display: inline-block;
+  display: inline-block;
+  overflow: hidden;
   .notice {
     margin-bottom: 5px;
     display: inline-block;
@@ -61,15 +62,7 @@ textarea:focus {
     box-sizing: border-box;
   }
   .alert {
-    margin-bottom: 5px;
-    display: inline-block;
-    overflow: hidden;
-    letter-spacing: 1px;
-    animation: typing 4s steps(30, end);
-    white-space: nowrap;
-    font-size: 10px;
-    border-right: 4px solid rgb(59, 134, 253);
-    box-sizing: border-box;
+
   }
 }
 

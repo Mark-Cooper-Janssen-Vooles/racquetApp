@@ -19,12 +19,129 @@
 }
 
 // sign up 
-
 .signup-form {
   h2 {
     margin-bottom: 5px;
     color: rgb(59, 134, 253);
     text-decoration: underline;
   }
-  
+  .signup-button {
+    width: 140px;
+  }
+}
+
+// user details
+.user-details-header {
+  margin-bottom: 5px;
+  color: rgb(59, 134, 253);
+  text-decoration: underline;
+}
+.new-user-body {
+  display: flex;
+  width: 80%;
+  .left-side {
+    width: 40%;
+    margin-right: 20px;
+    .name-input {
+      width: 240px;
+    }
+    .desc-input {
+      width: 240px;
+      height: 200px;
+      border: 1px solid rgb(59, 134, 253);
+    }
+    .pic-input {
+      width: 240px;
+    }
+  }
+  .right-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .state-input{
+      width: 240px;
+    } 
+    .postcode-input {
+      width: 240px;
+    } 
+    .suburb-input {
+      width: 240px;
+    }
+    .address-input {
+      width: 240px;
+    }
+    input {
+      width: 240px;
+      height: 18.3px;
+    }
+  }
+}
+
+// racquet 
+.racquet-header {
+  margin-bottom: 5px;
+  color: rgb(59, 134, 253);
+  text-decoration: underline;
+}
+.racquet-form {
+  display: flex;
+  .racquet-left {
+    margin-right: 15px;
+    height: 315px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    #racquet_title {
+      width: 240px;
+    }
+    #racquet_description {
+      width: 240px;
+      height: 140px;
+    }
+    #racquet_brand {
+      width: 240px;
+    }
+    #racquet_price {
+      width: 240px;
+    }
+  }
+  .racquet-right {
+    margin-right: 15px;
+    height: 315px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    #racquet_picture {
+      width: 240px;
+    }
+    #racquet_head_size {
+      width: 240px;
+    }
+    #racquet_length {
+      width: 240px;
+    }
+    #racquet_strung_weight {
+      width: 240px;
+    }
+    #racquet_balance {
+      width: 240px;
+    }
+    #racquet_stiffness {
+      width: 240px;
+    }
+    
+  }
+  .racquet-rightest {
+    height: 315px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: space-between;
+    #racquet_string_pattern {
+      width: 240px;
+    }
+    input {
+      width: 240px;
+    }
+  }
 }

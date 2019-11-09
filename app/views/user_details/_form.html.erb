@@ -11,51 +11,53 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+ <div class="new-user-body"> 
+  <div class="left-side">
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name, class: "name-input" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description, class: "desc-input" %>
+    </div>
+
+      <%# add photos %>
+    <div class="field">
+      <%= form.label :picture %> <%= form.file_field :picture, accept:
+      'image/png,image/gif,image/jpeg,image/jpg', class: "pic-input" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+  <div class="right-side">
+    <div class="loc">
+      <%= form.fields_for :location do |loc_form|%>
+      
+        <%= loc_form.label :state %>
+        <%= loc_form.text_field :state, class: "state-input" %><br><br>
+
+        <%= loc_form.label :postcode %>
+        <%= loc_form.text_field :postcode, class: "postcode-input" %><br><br>
+
+        <%= loc_form.label :suburb %>
+        <%= loc_form.text_field :suburb, class: "suburb-input" %><br><br>
+
+        <%= loc_form.label :optional_address_line_ %>
+        <%= loc_form.text_field :address_line, class: "address-input" %>
+
+      <% end %>
+    </div>
+    <div class="field">
+      <%# enum needs to default to 0 for non-admin, invisible field %>
+      <%= form.hidden_field(:user_type, :value => "non_admin") %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
   </div>
-
-    <%# add photos %>
-  <div class="field">
-    <%= form.label :picture %> <%= form.file_field :picture, accept:
-    'image/png,image/gif,image/jpeg,image/jpg' %>
-  </div>
-
-    <%# moved to controller! %>
-    <%# this needs to default to the logged in users id! %>
-    <%#= form.hidden_field(:user_id, :value => current_user.id) %>
-
-
-  <%= form.fields_for :location do |loc_form|%>
-  
-    <%= loc_form.label :state %>
-    <%= loc_form.text_field :state %>
-
-    <%= loc_form.label :postcode %>
-    <%= loc_form.text_field :postcode %>
-
-    <%= loc_form.label :suburb %>
-    <%= loc_form.text_field :suburb %>
-
-    <%= loc_form.label :optional_address_line_ %>
-    <%= loc_form.text_field :address_line %>
-
-  <% end %>
-
-  <div class="field">
-    <%# enum needs to default to 0 for non-admin, invisible field %>
-    <%= form.hidden_field(:user_type, :value => "non_admin") %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+</div>
 <% end %>
 
 <script type="text/javascript">
