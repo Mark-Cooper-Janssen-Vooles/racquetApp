@@ -14,6 +14,9 @@
 }
 
 .pagination {
+  a{
+    font-size: 10px;
+  }
   ul {
     display: flex;
     list-style-type: none;
@@ -21,6 +24,14 @@
       margin-left: 5px;
       margin-right: 5px;
     }
+  }
+}
+.search-pagination {
+  div{
+    font-size: 10px;
+  }
+  b{
+    font-size: 10px;
   }
 }
 
@@ -41,13 +52,13 @@
   justify-content: space-between;
   align-items: center;
   margin-right: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 
   .brand {
     height: 70px;
     width: 70px;
     // background: rgb(175, 175, 222);
-    border: 1px solid rgba(0,0,0,0.2);
+    // border: 1px solid rgba(0,0,0,0.2);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -58,8 +69,40 @@
     .image {
       height: 200px;
       width: 50px;
-      background: rgba(72, 72, 72, 0.112);
+      background: white;
       border-radius: 25px;
+      border: 1px solid rgba(0,0,0,0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      img {
+        width: 100%;
+      }
+      .head {
+        width: 50%;
+      }
+      .yonex {
+        width: 120%;
+      }
+      .babolat {
+        width: 80%;
+      }
+      .dunlop {
+        width: 50%;
+      }
+      .gamma {
+        width: 80%;
+      }
+      .prokennex {
+        width: 65%;
+      }
+      .technifibre {
+        width: 90%;
+      }
+      .volkl {
+        width: 65%;
+      }
     }
   }
 }

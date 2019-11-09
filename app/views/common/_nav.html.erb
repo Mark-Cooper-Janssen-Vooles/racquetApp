@@ -28,7 +28,7 @@
     <% elsif user_signed_in? %>
       <%= link_to("Inbox", new_user_detail_path) %>
       <%= link_to("Sell", new_user_detail_path)%>
-      <span>Favourites</span>
+      <%= link_to("Favourites", new_user_detail_path)%>
       <%= link_to("My Account", new_user_detail_path) %>
     <% else %>
       <%= link_to("Inbox", new_user_session_path) %>

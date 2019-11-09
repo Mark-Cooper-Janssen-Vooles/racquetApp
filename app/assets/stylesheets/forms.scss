@@ -1,0 +1,30 @@
+// login
+.login-form {
+  .field {
+    width: 100%;
+  }
+  h2 {
+    margin-bottom: 5px;
+    color: rgb(59, 134, 253);
+    text-decoration: underline;
+  }
+  .remember {
+    display: flex;
+    width: 140px;
+    justify-content: space-between;
+  }
+  .login-button {
+    width: 140px;
+  }
+}
+
+// sign up 
+
+.signup-form {
+  h2 {
+    margin-bottom: 5px;
+    color: rgb(59, 134, 253);
+    text-decoration: underline;
+  }
+  
+}

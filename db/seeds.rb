@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 require 'aws-sdk' 
 
@@ -52,11 +45,6 @@ one_to_ten.each do |user|
     #assign status
     Status.create!(sold: false, racquet_id: racquet.id, view_count: 0)
   end
-
-  #make favourites
-  # one_to_ten.sample.times do
-  #   Favourite.create(user_id: the_user.id, racquet_id: )
-  # end
 end
 
 #make favourites

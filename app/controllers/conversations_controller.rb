@@ -4,6 +4,7 @@ class ConversationsController < ApplicationController
   def index
     #find conversation between specific users
     @conversations = Conversation.where("sender_id = ? OR receiver_id = ?", current_user.id, current_user.id)
+    @users = User.all
   end
 
   def create

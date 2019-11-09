@@ -1,0 +1,113 @@
+a {
+  color:  rgba(0, 0, 0, 0.714);
+  text-decoration: underline rgb(59, 134, 253);
+  &:visited {
+    color: rgba(0,0,0,0.2); 
+  }
+
+  &:hover {
+    color: #fff;
+    background-color: rgb(59, 134, 253);
+  }
+}
+// a:link - a normal, unvisited link
+// a:visited - a link the user has visited
+// a:hover - a link when the user mouses over it
+// a:active - a link the moment it is clicked
+
+
+img {
+  transition: transform .5s, filter 0.5s ease-in-out;
+  filter: grayscale(40%);
+  &:hover {
+    border: none;
+    transform: scale(1.1);
+    filter: grayscale(0);
+  }
+}
+
+.search-input:focus {
+  border: 3px solid red;
+}
+
+input {
+  border: 1px solid rgb(59, 134, 253);
+}
+input:focus {
+  border: 3px solid rgb(59, 134, 253);
+}
+input:hover {
+  border: 1px, solid,rgb(59, 134, 253);
+  background: rgb(59, 134, 253);
+  color: white;
+}
+textarea:focus {
+  border: 3px solid rgb(59, 134, 253);
+  // background: red;
+}
+
+.notices {
+  // font-family: Courier, monospace;
+	display: inline-block;
+  .notice {
+    margin-bottom: 5px;
+    display: inline-block;
+    overflow: hidden;
+    letter-spacing: 1px;
+    animation: typing 4s steps(30, end);
+    white-space: nowrap;
+    font-size: 10px;
+    border-right: 4px solid rgb(59, 134, 253);
+    box-sizing: border-box;
+  }
+  .alert {
+    margin-bottom: 5px;
+    display: inline-block;
+    overflow: hidden;
+    letter-spacing: 1px;
+    animation: typing 4s steps(30, end);
+    white-space: nowrap;
+    font-size: 10px;
+    border-right: 4px solid rgb(59, 134, 253);
+    box-sizing: border-box;
+  }
+}
+
+@keyframes typing {
+  from { 
+      width: 0% 
+  }
+  to { 
+      width: 100% 
+  }
+}
+
+#error_explanation {
+  margin-top: 10px;
+  width: calc(100% - 35px);
+  border: 2px solid rgb(59, 134, 253);
+  padding: 7px 7px 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px -7px 0;
+    background-color: rgb(59, 134, 253);
+    color: #fff;
+  }
+
+  ul li {
+    font-size: 12px;
+    list-style: square;
+  }
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: rgb(59, 134, 253);
+  display: table;
+}

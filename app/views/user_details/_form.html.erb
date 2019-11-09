@@ -48,10 +48,6 @@
 
   <% end %>
 
-    <%#= form.label :location_id %>
-    <%#= form.text_field :location_id %>
-    <%# need access to location table here! do in controller. %>
-
   <div class="field">
     <%# enum needs to default to 0 for non-admin, invisible field %>
     <%= form.hidden_field(:user_type, :value => "non_admin") %>

@@ -1,8 +1,3 @@
-- Redo site map to reflect current design
-- Redo ERD thing to reflect current design
-- Do more figma drawings?!
-- do slide deck at the very end!
-
 # README
 
 ### R7 
@@ -74,7 +69,7 @@ Tech stack (e.g. html, css, deployment platform, etc)
 
 **Sitemap:**
 ![Sitemap](/docs/sitemap_racquetapp.png "Sitemap")
-<p>Note: This sitemap was created at the start of the project and has since changed somewhat through development.</p>
+
 
 **Screenshots:**
 ![Screenshot](/docs/screenshot1.png "Screenshot")
@@ -137,6 +132,7 @@ With an account now set up and logged in, the user can either list a racquet to 
 The user can click "My Account" to see their information, to view sales, view purchases, edit their profile, delete their profile and view their racquet listings. At this point clicking "view purchases" will take you to a page which lists all the purchases they have made. Conversely on the sellers account, if they click "view sales" it will list all the sales they have made and the total amount of money made through those sales. 
 
 If the user sees a racquet they were interested in but are not willing to commit to buying at the current time, they can favorite the racquet which stores it on their favorites page. 
+
 ---
 
 ### R13
@@ -185,8 +181,6 @@ An ERD for your app
 https://www.lucidchart.com/documents/edit/d5391265-7e1d-44ac-bf07-e0b5534ee76b/0_0?beaconFlowId=744B23A6A8A8B79E
 
 ![ERD](/docs/RacquetApp.png "ERD")
-
-<p>Note: This ERD was created at the start of the project and has since changed somewhat through development. The shopping cart idea was dropped, but conversations and messages tables were added. </p>
 
 ---
 
@@ -490,79 +484,4 @@ This project had tasks divided up into "todo", "MVP" "BEAST", "DONE" and "issues
 ![Trello](/docs/trello8.png "Trello")
 ![Trello](/docs/trello9.png "Trello")
 
-
-
-
-
-
-
-
-### Things to talk about in presentation
-- General overview
-- search partial which displays in all pages, getting @q to work
-- pagination gem
-- incrementing page views
-- delete_duplicates in favourites controller
-- seed file
-- google API, geocoder gem, generating maps based off of suburb.
-- using "Ausburbs" to create a pre-defined list of suburbs and states 
-- using Javascript to force entry into input fields to be capitalized 
-- Used RSPEC / capybara for TDD for model validations
-- talk about rails bug discovery: 
-````ruby
-    @racquet = Racquet.find(racquet_id)
-    @user = User.find(user_id)
-
-    @racquet.status.sold = true
-    @racquet.status.buyer_user_id_id = @user.id
-    @racquet.save
-````
-
-Doesn't work but this does work: 
-
-````ruby
-    @racquet = Racquet.find(params[:racquetId])
-    @user = User.find(params[:userId])
-
-    the_racquet = Status.where("racquet_id = '#{@racquet.id}'")[0]
-
-    the_racquet.sold = true
-    the_racquet.buyer_user_id_id = @user.id
-    the_racquet.save
-````
-
-    The reason seems to be because of the nested call: first we go to the racquet instance, then the status instance, then try to change the sold and save. Rails says it solves in the console, but upon exiting and starting again it hasn't saved. 
-
-    However if we go only one call deep, i.e. just the status (shown above with the .where search), and set the sold to true, it works.
-
-    - geocoder timing out needed initializer file for when internet is slow
-    - geocoder server going down and needing an if statement when it returns nil
-    - deleting user_details also needs to delete user, racquet, racquet status and location ... needed to manually delete status of racquet and racquet in user_details delete method with a loop:
-
-````ruby
- def destroy
-    @user_detail.destroy
-    respond_to do |format|
-      #delete racquets statuses and then the racquet
-      User.find(@user_detail.user_id).racquets.each do |racquet|
-        racquet.status.destroy
-      end
-      User.find(@user_detail.user_id).racquets.destroy_all
-      #delete favourites
-      if User.find(@user_detail.user_id).favourite != nil
-        User.find(@user_detail.user_id).favourite.destroy
-      end
-      #delete user 
-      User.find(@user_detail.user_id).destroy
-
-      if current_user.user_detail.user_type == "admin"
-        format.html { redirect_to user_details_path, notice: 'User detail was successfully destroyed.' }
-      else
-        format.html { redirect_to new_user_detail_path, notice: 'User detail was successfully destroyed.' } 
-      end
-
-      format.json { head :no_content }
-    end
-  end
-````
-
+---

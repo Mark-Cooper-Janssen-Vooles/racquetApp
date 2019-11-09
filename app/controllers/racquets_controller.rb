@@ -70,7 +70,7 @@ class RacquetsController < ApplicationController
     @racquet = Racquet.new
   end
 
-  # GET /racquets/1/edit
+  # GET /posts/1/edit
   def edit
   end
 
@@ -104,10 +104,10 @@ class RacquetsController < ApplicationController
       if @racquet.update(racquet_params)
         id = @racquet.id
         format.html { redirect_to racquet_path(id), notice: 'Racquet was successfully updated.' }
-        format.json { render :show, status: :ok, location: @racquet }
+        format.json { render :show, status: :ok, location: racquet_path(id) }
       else
         format.html { render :edit }
-        format.json { render json: @racquet.errors, status: :unprocessable_entity }
+        format.json { render json: racquet_path(id).errors, status: :unprocessable_entity }
       end
     end
   end
