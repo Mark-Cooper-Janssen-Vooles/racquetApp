@@ -53,7 +53,7 @@
   align-items: center;
   margin-right: 20px;
   margin-bottom: 15px;
-
+  overflow: hidden;
   .brand {
     height: 70px;
     width: 70px;
@@ -63,6 +63,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    overflow: hidden;
     span {
 
     }
@@ -123,6 +124,7 @@
     height: 300px;
     width: 20%;
     margin-left: 10px;
+    // overflow: hidden;
     .racquet-picture {
       height: 50%;
       width: 100%;
@@ -147,7 +149,9 @@
         display: flex;
         justify-content: space-between;
         height: 20px;
-        width: 100%;
+        width: calc(100% - 10px);
+        margin-left: 5px;
+        margin-right: 5px;
         border-bottom: 1px solid black;
         // background: rgb(0, 255, 0);
         .the-brand {
@@ -162,6 +166,9 @@
         height: 20px;
         width: 100%;
         border-bottom: 1px solid black;
+        width: calc(100% - 10px);
+        margin-left: 5px;
+        margin-right: 5px;
         // background: rgb(242, 0, 255);
       }
     }
@@ -194,17 +201,19 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      // margin-left: 5px;
-      // margin-right: 5px;
       width: 100%;
       height: 50%;
+      
       .racquet-title-brand {
         display: flex;
         justify-content: space-between;
         height: 20px;
-        width: 100%;
+
         border-bottom: 1px solid black;
-        // background: rgb(0, 255, 0);
+
+        width: calc(100% - 10px);
+        margin-left: 5px;
+        margin-right: 5px;
         .the-brand {
           font-size: 10px;
         }
@@ -214,22 +223,31 @@
         justify-content: space-between;
         align-items: center;
         height: 20px;
-        width: 100%;
+
         border-bottom: 1px solid black;
+        width: calc(100% - 10px);
+        margin-left: 5px;
+        margin-right: 5px;
         // background: rgb(242, 0, 255);
       }
-      .racquet-description {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 110px;
-        span {
-          color: red
-        }
-      }
+   
+
     }
   }
 }
+.racquet-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100px;
+  width: calc(100% - 10px);
+  margin-left: 5px;
+  margin-right: 5px;
+  span {
+    color: red
+  }
+}  
+
 
 // styling for show page racquet 
 .racquet-show-content {
@@ -249,6 +267,7 @@
     align-items: center;
     justify-content: center;
     border: 1px solid rgba(0,0,0,0.2);
+    overflow: hidden;
   }
   .racquet-info {
     padding: 5px;
@@ -321,9 +340,13 @@
           
         }
       }
-      .user-image {
-        height: 120px;
+      .user-pic {
+        overflow: hidden;
+        .user-image {
+          height: 120px;
+        }
       }
+
     }
     
     .seller-location {

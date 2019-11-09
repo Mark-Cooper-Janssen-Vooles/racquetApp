@@ -20,7 +20,9 @@
   <div class="user-info">
     <div class="header">
       <h1><%= @user_detail.name %></h1>
-      <span>Contact user: <%= link_to User.find(@user_detail.id).email, conversations_path(sender_id: current_user.id, receiver_id: User.find(@user_detail.id).id), method: :post %></span>
+
+        <span><%= link_to "Contact User", conversations_path(sender_id: current_user.id, receiver_id: User.find(UserDetail.find(params[:id]).user_id)), method: :post %></span>
+
 
     </div>
 
@@ -29,18 +31,19 @@
         <div class="top-info">
           <div>
             <strong>Description:</strong>
+
             <%= @user_detail.description %>
           </div>
           <div>
             <% if @user_detail.location %>
               
                 <strong>Location:</strong>
-                <% if user_signed_in? && current_user.user_detail.id == @user_detail.id %>
-                  <%= @user_detail.location.address_line %> |
-                <% end %>
                 <%= @user_detail.location.postcode %> |
                 <%= @user_detail.location.suburb %> |
-                <%= @user_detail.location.state %>
+                <%= @user_detail.location.state %>                
+                <% if user_signed_in? && current_user.user_detail.id == @user_detail.id %>
+                  | <%= @user_detail.location.address_line %> 
+                <% end %>
             <% else %>
               <%= link_to("Add your location", new_location_path) %>
             <% end %>

@@ -6,6 +6,28 @@ price = (50..320).to_a
 state_rand = ["VIC", "NSW", "WA", "TAS", "NT", "ACT", "QLD", "SA"]
 suburb = ["Melbourne", "Perth", "Hobart", "Canberra", "Sydney", "Brisbane"]
 
+state_suburb_postcode = [{
+  state: "VIC",
+  postcode: "3000",
+  suburb: "Melbourne"
+}, {
+  state: "WA",
+  postcode: "6000",
+  suburb: "Perth"
+},{
+  state: "TAS",
+  postcode: "7000",
+  suburb: "Hobart"
+},{
+  state: "NSW",
+  postcode: "2000",
+  suburb: "Sydney"
+}, {
+  state: "QLD",
+  postcode: "4000",
+  suburb: "Brisbane"
+}]
+
 one_to_ten.each do |user|
   #create user + user detail
   the_user = User.create!(email: Faker::Internet.email, password: "password")
@@ -17,9 +39,12 @@ one_to_ten.each do |user|
   user_detail.save
 
   #add location
+
   1.times do |thing|
-    suburb1 = suburb.sample.upcase
-    Location.create!(state: state_rand.sample, suburb: suburb1, address_line: "123 fake street", postcode: "3000", user_detail_id: user, latitude: Geocoder.search(suburb1).first.coordinates[0].to_d, longitude: Geocoder.search(suburb1).first.coordinates[1].to_d)
+    place = state_suburb_postcode.sample
+    # byebug
+    Location.create!(state: place[:state], suburb: place[:suburb].upcase, address_line: "123 fake street", postcode: place[:postcode], user_detail_id: user, latitude: Geocoder.search(place[:suburb]).first.coordinates[0].to_d, longitude: Geocoder.search(place[:suburb]).first.coordinates[1].to_d)
+
   end
 
   #racquet info used below
@@ -56,9 +81,9 @@ suburb2 = suburb.sample.upcase
 
 #admin user
 User.create!(email: "admin@admin.com", password: "password")
-admin_detail = UserDetail.create(name: "admin", description: "the boss. the boss. the boss. the boss. the boss. the boss. the boss.", user_id: 11, user_type: 1)
+admin_detail = UserDetail.create(name: "Admin", description: "the boss. the boss. the boss. the boss. the boss. the boss. the boss.", user_id: 11, user_type: 1)
 #added recently - could cause issues?
-Location.create!(state: state_rand.sample, suburb: suburb2, address_line: "123 fake street", postcode: "3000", user_detail_id: 11, latitude: Geocoder.search(suburb2).first.coordinates[0].to_d, longitude: Geocoder.search(suburb2).first.coordinates[1].to_d)
+Location.create!(state: "VIC", suburb: "Melbourne".upcase, address_line: "123 fake street", postcode: "3000", user_detail_id: 11, latitude: Geocoder.search("MELBOURNE").first.coordinates[0].to_d, longitude: Geocoder.search("MELBOURNE").first.coordinates[1].to_d)
 one_to_seven = (1..7).to_a 
 admin_image = "user#{one_to_seven.sample}.png"
 admin_detail.picture.attach(io: File.open("app/assets/images/users/#{admin_image}"), filename: "#{admin_image}")
@@ -66,9 +91,9 @@ admin_detail.save
 
 #normal user
 User.create!(email: "com@com.com", password: "password")
-com_detail = UserDetail.create(name: "com", description: "a normal user. a normal user. a normal user. a normal user. a normal user. ", user_id: 12, user_type: 0)
+com_detail = UserDetail.create(name: "Com", description: "a normal user. a normal user. a normal user. a normal user. a normal user. ", user_id: 12, user_type: 0)
 #added recently- could cause issues?
-Location.create!(state: state_rand.sample, suburb: suburb2, address_line: "123 fake street", postcode: "3000", user_detail_id: 12, latitude: Geocoder.search(suburb2).first.coordinates[0].to_d, longitude: Geocoder.search(suburb2).first.coordinates[1].to_d)
+Location.create!(state: "WA", suburb: "Yokine".upcase, address_line: "123 fake street", postcode: "6061", user_detail_id: 12, latitude: Geocoder.search("YOKINE").first.coordinates[0].to_d, longitude: Geocoder.search("YOKINE").first.coordinates[1].to_d)
 one_to_seven = (1..7).to_a 
 com_image = "user#{one_to_seven.sample}.png"
 com_detail.picture.attach(io: File.open("app/assets/images/users/#{com_image}"), filename: "#{com_image}")

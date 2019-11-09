@@ -219,6 +219,14 @@ RacquetApp uses the following third party services:
 * The Kaminari gem which is used to paginate the list of racquets
 * The Bootstrap gem which is used to style the pagination from Kaminari
 
+<p>Capybara user testing: </p>
+
+![User Test](/docs/user_test.gif "User Test")
+
+<p>Capybara message testing: </p>
+
+![User Test](/docs/message_test.gif "User Test")
+
 ---
 
 ### R17
@@ -483,5 +491,6 @@ This project had tasks divided up into "todo", "MVP" "BEAST", "DONE" and "issues
 ![Trello](/docs/trello7.png "Trello")
 ![Trello](/docs/trello8.png "Trello")
 ![Trello](/docs/trello9.png "Trello")
+![Trello](/docs/trello10.png "Trello")
 
 ---

@@ -78,7 +78,9 @@
            <span><%= link_to("View Users Profile", user_detail_path(@seller_user.user_detail.id))%></span>
           <span class="description"><%= @seller_user.user_detail.description %></span>
         </div>
-        <%= image_tag(@seller_user.user_detail.picture, class: "user-image") if @seller_user.user_detail.picture.attached? %>
+        <div class="user-pic">
+          <%= image_tag(@seller_user.user_detail.picture, class: "user-image") if @seller_user.user_detail.picture.attached? %>
+        </div>
       </div>
     </div>
 

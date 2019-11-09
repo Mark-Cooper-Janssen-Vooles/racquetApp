@@ -54,9 +54,7 @@ class UserDetailsController < ApplicationController
       if @user_detail.save
         
         if @user_detail.picture.attached? == false 
-          one_to_seven = (1..7).to_a 
-          user_image = "user#{one_to_seven.sample}.png"
-          @user_detail.picture.attach(io: File.open("app/assets/images/users/#{user_image}"), filename: "#{user_image}")
+          @user_detail.picture.attach(io: File.open("app/assets/images/users/user-default.png"), filename: "user-default.png")
           @user_detail.save
         end
 

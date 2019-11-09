@@ -28,30 +28,25 @@ def sign_up_successfully_dog
 end
 
 def user_details_successfully_cat
-
-  click_button "Create User detail"
   fill_in "Name", with: "cat"
   fill_in "Description", with: "The snake market place had lots of cartoon snakes"
   attach_file('Picture', 'app/assets/images/users/cat.png')
-  fill_in "Postcode", with: "3000"
-  fill_in "Address line", with: "30 Spencer Street"
-  fill_in "Suburb", with: "MELBOURNE"
   fill_in "State", with: "VIC"
+  fill_in "Suburb", with: "MELBOURNE"
+  fill_in "Postcode", with: "3000"
 
   click_button "Create User detail"
   expect(page).to have_content("User detail was successfully created.")
 end
 
 def user_details_successfully_dog
-
-  click_button "Create User detail"
   fill_in "Name", with: "dog"
   fill_in "Description", with: "The snake market place had lots of cartoon snakes"
   attach_file('Picture', 'app/assets/images/users/dog1.png')
-  fill_in "Postcode", with: "3000"
-  fill_in "Address line", with: "30 Spencer Street"
-  fill_in "Suburb", with: "MELBOURNE"
   fill_in "State", with: "VIC"
+  fill_in "Suburb", with: "MELBOURNE"
+  fill_in "Postcode", with: "3000"
+ 
 
   click_button "Create User detail"
   expect(page).to have_content("User detail was successfully created.")
@@ -69,6 +64,7 @@ RSpec.feature "Message between users", type: :feature do
     user_details_successfully_cat
 
     click_link "Inbox"
+
     click_link "dog@user.com"
 
     fill_in 'message_body', with: 'Hello dog, this is cat.'

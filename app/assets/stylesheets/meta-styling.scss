@@ -46,6 +46,14 @@ textarea:focus {
   // background: red;
 }
 
+button {
+  border: 1px solid  rgb(59, 134, 253);
+  &:hover {
+    background:  rgb(59, 134, 253);
+    color: white;
+  }
+}
+
 .notices {
   // font-family: Courier, monospace;
   display: inline-block;

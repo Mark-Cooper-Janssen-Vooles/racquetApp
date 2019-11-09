@@ -25,7 +25,6 @@ def user_details_successfully
   fill_in "Description", with: "The snake market place had lots of cartoon snakes"
   attach_file('Picture', 'app/assets/images/solid_snake.png')
   fill_in "Postcode", with: "3000"
-  fill_in "Address line", with: "30 Spencer Street"
   fill_in "Suburb", with: "Melbourne"
   fill_in "State", with: "VIC"
 
