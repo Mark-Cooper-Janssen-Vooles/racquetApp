@@ -39,6 +39,7 @@ class UserDetailsController < ApplicationController
 
   # GET /user_details/1/edit
   def edit
+    # raise
   end
 
   # POST /user_details

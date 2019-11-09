@@ -1,6 +1,7 @@
 <h2 class="user-details-header">Editing User Detail</h2>
+<%# @user_detail = UserDetail.find(params[:id] %>
 
-<%= render 'form', user_detail: @user_detail %>
+<%= render 'form', the_url: update_user_detail_path, user_detail: @user_detail %>
 
 <%= link_to 'Show', @user_detail %> |
 <%= link_to 'Back', user_detail_path(@user_detail.id) %>
