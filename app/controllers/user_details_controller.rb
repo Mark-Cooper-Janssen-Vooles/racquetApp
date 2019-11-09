@@ -2,6 +2,7 @@ class UserDetailsController < ApplicationController
   before_action :authenticate_user!, only: [:show, :edit, :update, :destroy, :new]
   before_action :set_user_detail, only: [:show]
   before_action :set_user_detail_specific, only: [:edit, :update, :destroy]
+  before_action :set_user_detail_address, only: [:edit, :update]
 
   # GET /user_details
   # GET /user_details.json
@@ -74,7 +75,7 @@ class UserDetailsController < ApplicationController
     respond_to do |format|
 
       if @user_detail.update(user_detail_params)
-        update_coords_based_on_suburb
+        # update_coords_based_on_suburb
 
         if current_user.user_detail.user_type == "admin"
           format.html { redirect_to user_details_path, notice: 'User detail was successfully updated.' }
@@ -156,5 +157,9 @@ class UserDetailsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_detail_params
       params.require(:user_detail).permit(:name, :description, :user_id, :user_type, :picture, location_attributes: [:state, :suburb, :address_line, :postcode])
+    end
+
+    def set_user_detail_address
+      @location = UserDetail.find(params[:id]).location
     end
 end

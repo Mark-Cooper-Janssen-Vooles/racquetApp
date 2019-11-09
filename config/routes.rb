@@ -7,10 +7,9 @@ Rails.application.routes.draw do
   get "user_details/new", to: "user_details#new"
   post "user_details/new", to: "user_details#create"
   get "user_detail/:id", to: "user_details#show", as: "user_detail"
-  patch "user_detail/:id/update", to: "user_details#update", as: "update_user_detail"
+  patch "user_detail/:id", to: "user_details#update"
   delete "user_detail/:id", to: "user_details#destroy"
   get "user_detail/:id/edit", to: "user_details#edit", as: "edit_user_detail"
-
 
   get 'purchases', to: 'user_details#previous_purchases', as: "purchases"
   get 'sales', to: 'user_details#sales', as: "sales"

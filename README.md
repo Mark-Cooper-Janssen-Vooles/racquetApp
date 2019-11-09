@@ -1,5 +1,6 @@
 # README
 
+
 ### R7 
 Identification of the problem you are trying to solve by building this particular marketplace app.
 
@@ -27,6 +28,7 @@ A link (URL) to your deployed app (i.e. website)
 
 ---
 
+**Please use chrome to view website.**
 https://racquetapp.herokuapp.com/
 
 ---
