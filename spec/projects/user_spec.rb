@@ -34,7 +34,7 @@ def user_details_successfully
   attach_file('Picture', 'app/assets/images/solid_snake.png')
   fill_in "Postcode", with: "3000"
   fill_in "Suburb", with: "Melbourne"
-  select "VIC", from: "State"
+  fill_in "State", with: "VIC"
   sleep(1)
   click_button "Create User detail"
   expect(page).to have_content("User detail was successfully created.")
