@@ -89,6 +89,6 @@ gem "jquery-rails", "~> 4.3"
 
 gem "stripe", "~> 5.7"
 
-gem "geocoder", "~> 1.5"
+gem "geocoder", "~> 1.6"
 
 gem "ausburbs", "~> 0.2.1"
